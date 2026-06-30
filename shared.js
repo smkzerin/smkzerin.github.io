@@ -116,7 +116,9 @@ const videoModal = {
   }
 };
 
-/* HERO COLLAGE (homepage) — cycles through sets of 4 featured photos */
+/* PHOTO COLLAGE (reused on homepage and each event page) — cycles through
+   sets of 4 featured ("cover") photos. If the page has data-category set
+   (gallery pages), the collage is filtered to that event's covers only. */
 const heroCollage = {
   el: null,
   sets: [],
@@ -125,13 +127,20 @@ const heroCollage = {
   init() {
     this.el = document.getElementById("hero-collage");
     if (!this.el) return;
-    const covers = MEDIA.photos.filter(p => p.cover);
+    const category = document.body.dataset.category; // undefined on homepage = show all
+    let covers = MEDIA.photos.filter(p => p.cover);
+    if (category) covers = covers.filter(p => p.category === category);
+
     this.sets = [];
     for (let i = 0; i < covers.length; i += 4) {
       const set = covers.slice(i, i + 4);
       if (set.length === 4) this.sets.push(set);
     }
-    if (this.sets.length === 0) return;
+    if (this.sets.length === 0) {
+      // not enough covers for a full staggered set — hide the collage gracefully
+      this.el.closest("[data-collage-section]")?.classList.add("hidden");
+      return;
+    }
     document.getElementById("hero-prev").addEventListener("click", () => this.step(-1));
     document.getElementById("hero-next").addEventListener("click", () => this.step(1));
     this.render();

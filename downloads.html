@@ -16,6 +16,7 @@
   <nav class="hidden md:flex gap-8 text-xs tracking-[0.1em] uppercase">
     <a href="holud.html" class="hover:opacity-70">Holud</a>
     <a href="wedding.html" class="hover:opacity-70">Wedding</a>
+    <a href="reception.html" class="hover:opacity-70">Reception</a>
     <a href="downloads.html" class="font-medium" style="color:var(--marigold-deep)">Downloads</a>
   </nav>
   <button id="menu-btn" class="md:hidden text-2xl leading-none" aria-label="Open menu">&#9776;</button>
@@ -23,6 +24,7 @@
 <div id="mobile-nav" class="hidden md:hidden px-6 pb-4 flex flex-col gap-3 text-xs uppercase tracking-[0.1em]">
   <a href="holud.html">Holud</a>
   <a href="wedding.html">Wedding</a>
+  <a href="reception.html">Reception</a>
   <a href="downloads.html">Downloads</a>
 </div>
 
@@ -37,7 +39,7 @@
   <span class="garland mx-auto block max-w-sm mb-10"></span>
 
   <!-- Whole-folder shortcuts -->
-  <section class="grid sm:grid-cols-2 gap-4 mb-12">
+  <section class="grid sm:grid-cols-3 gap-4 mb-12">
     <a href="#demo-download" class="block rounded-xl border p-5" style="border-color:rgba(43,38,32,0.15)">
       <p class="text-xs tracking-[0.2em] uppercase mb-1" style="color:var(--marigold-deep)">Holud night</p>
       <p class="font-display text-xl">Open full folder in Drive</p>
@@ -45,6 +47,11 @@
     </a>
     <a href="#demo-download" class="block rounded-xl border p-5" style="border-color:rgba(43,38,32,0.15)">
       <p class="text-xs tracking-[0.2em] uppercase mb-1" style="color:var(--maroon)">Wedding night</p>
+      <p class="font-display text-xl">Open full folder in Drive</p>
+      <p class="text-xs mt-1" style="color:rgba(43,38,32,0.55)">All photos and raw video</p>
+    </a>
+    <a href="#demo-download" class="block rounded-xl border p-5" style="border-color:rgba(43,38,32,0.15)">
+      <p class="text-xs tracking-[0.2em] uppercase mb-1" style="color:var(--green)">Reception</p>
       <p class="font-display text-xl">Open full folder in Drive</p>
       <p class="text-xs mt-1" style="color:rgba(43,38,32,0.55)">All photos and raw video</p>
     </a>
@@ -85,7 +92,7 @@ function renderDownloadGroup(category, label) {
 }
 
 document.getElementById("download-lists").innerHTML =
-  renderDownloadGroup("holud", "Holud night") + renderDownloadGroup("wedding", "Wedding night");
+  renderDownloadGroup("holud", "Holud night") + renderDownloadGroup("wedding", "Wedding night") + renderDownloadGroup("reception", "Reception");
 
 document.getElementById("year").textContent = new Date().getFullYear();
 

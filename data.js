@@ -31,10 +31,12 @@ function makePlaceholderItems(category, count, type = "photo") {
 const MEDIA = {
   photos: [
     ...makePlaceholderItems("holud", 18, "photo"),
-    ...makePlaceholderItems("wedding", 18, "photo")
+    ...makePlaceholderItems("wedding", 18, "photo"),
+    ...makePlaceholderItems("reception", 18, "photo")
   ],
   videos: [
     ...makePlaceholderItems("holud", 3, "video"),
-    ...makePlaceholderItems("wedding", 4, "video")
+    ...makePlaceholderItems("wedding", 4, "video"),
+    ...makePlaceholderItems("reception", 2, "video")
   ]
 };
