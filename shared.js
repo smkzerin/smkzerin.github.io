@@ -189,7 +189,27 @@ const heroCollage = {
       this.render();
     });
 
+    const main = document.getElementById("carousel-main");
     const thumbs = document.getElementById("carousel-thumbs");
+
+    if (main) {
+      let touchStartX = 0;
+      main.addEventListener("touchstart", (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+      }, { passive: true });
+      main.addEventListener("touchend", (e) => {
+        const diff = touchStartX - e.changedTouches[0].screenX;
+        if (Math.abs(diff) > 50) {
+          if (diff > 0) {
+            this.index = (this.index + 1) % this.covers.length;
+          } else {
+            this.index = (this.index - 1 + this.covers.length) % this.covers.length;
+          }
+          this.render();
+        }
+      }, { passive: true });
+    }
+
     if (!thumbs) return;
 
     thumbs.addEventListener("wheel", (e) => {
