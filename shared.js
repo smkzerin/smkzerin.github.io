@@ -36,6 +36,7 @@ const lightbox = {
   el: null,
   imgEl: null,
   captionEl: null,
+  downloadEl: null,
   items: [],
   index: 0,
 
@@ -43,10 +44,12 @@ const lightbox = {
     this.el = document.getElementById("lightbox");
     this.imgEl = document.getElementById("lightbox-img");
     this.captionEl = document.getElementById("lightbox-caption");
+    this.downloadEl = document.getElementById("lightbox-download");
     if (!this.el) return;
     document.getElementById("lightbox-close").addEventListener("click", () => this.close());
     document.getElementById("lightbox-prev").addEventListener("click", () => this.step(-1));
     document.getElementById("lightbox-next").addEventListener("click", () => this.step(1));
+    if (this.downloadEl) this.downloadEl.addEventListener("click", (e) => e.stopPropagation());
     this.el.addEventListener("click", (e) => { if (e.target === this.el) this.close(); });
     document.addEventListener("keydown", (e) => {
       if (this.el.classList.contains("hidden")) return;
@@ -69,6 +72,10 @@ const lightbox = {
     this.imgEl.src = driveFullImageUrl(item.id);
     this.imgEl.alt = item.name;
     this.captionEl.textContent = item.name;
+    if (this.downloadEl) {
+      this.downloadEl.href = driveDownloadUrl(item.id);
+      this.downloadEl.download = item.name;
+    }
   },
 
   step(dir) {
@@ -79,6 +86,7 @@ const lightbox = {
   close() {
     this.el.classList.add("hidden");
     this.imgEl.src = "";
+    if (this.downloadEl) this.downloadEl.href = "#";
     document.body.classList.remove("overflow-hidden");
   }
 };
@@ -87,10 +95,12 @@ const lightbox = {
 const videoModal = {
   el: null,
   frameWrap: null,
+  downloadEl: null,
 
   init() {
     this.el = document.getElementById("video-modal");
     this.frameWrap = document.getElementById("video-frame-wrap");
+    this.downloadEl = document.getElementById("video-modal-download");
     if (!this.el) return;
     document.getElementById("video-modal-close").addEventListener("click", () => this.close());
     this.el.addEventListener("click", (e) => { if (e.target === this.el) this.close(); });
@@ -106,12 +116,17 @@ const videoModal = {
       : `<iframe src="${src}" class="w-full h-full" allow="autoplay" allowfullscreen></iframe>`;
     this.frameWrap.innerHTML = el;
     document.getElementById("video-modal-caption").textContent = item.name;
+    if (this.downloadEl) {
+      this.downloadEl.href = driveDownloadUrl(item.id);
+      this.downloadEl.download = item.name;
+    }
     this.el.classList.remove("hidden");
     document.body.classList.add("overflow-hidden");
   },
 
   close() {
     this.frameWrap.innerHTML = "";
+    if (this.downloadEl) this.downloadEl.href = "#";
     this.el.classList.add("hidden");
     document.body.classList.remove("overflow-hidden");
   }

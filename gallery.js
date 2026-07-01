@@ -65,13 +65,16 @@ function renderVideos(videos) {
     return;
   }
   wrap.innerHTML = videos.map((v, i) => `
-    <button class="group relative flex-shrink-0 w-56 rounded-lg overflow-hidden border" style="border-color:rgba(43,38,32,0.12)" data-video-index="${i}">
-      <img src="${driveThumbUrl(v.id, 320)}" alt="${v.name}" loading="lazy" class="w-full h-36 object-cover transition duration-300 group-hover:scale-105">
-      <span class="absolute inset-0 flex items-center justify-center">
-        <span class="w-11 h-11 rounded-full flex items-center justify-center text-lg" style="background:rgba(43,38,32,0.55);color:#FBF6EC">&#9658;</span>
-      </span>
-      <span class="absolute bottom-0 left-0 right-0 px-3 py-2 text-xs text-left" style="background:linear-gradient(to top, rgba(43,38,32,0.85), transparent);color:#FBF6EC">${v.name}</span>
-    </button>
+    <div class="relative flex-shrink-0 w-56">
+      <button class="group relative w-full rounded-lg overflow-hidden border" style="border-color:rgba(43,38,32,0.12)" data-video-index="${i}">
+        <img src="${driveThumbUrl(v.id, 320)}" alt="${v.name}" loading="lazy" class="w-full h-36 object-cover transition duration-300 group-hover:scale-105">
+        <span class="absolute inset-0 flex items-center justify-center">
+          <span class="w-11 h-11 rounded-full flex items-center justify-center text-lg" style="background:rgba(43,38,32,0.55);color:#FBF6EC">&#9658;</span>
+        </span>
+        <span class="absolute bottom-0 left-0 right-0 px-3 py-2 text-xs text-left" style="background:linear-gradient(to top, rgba(43,38,32,0.85), transparent);color:#FBF6EC">${v.name}</span>
+      </button>
+      <a href="${driveDownloadUrl(v.id)}" download="${v.name}" class="block mt-1.5 text-xs text-center underline" style="color:var(--charcoal)" title="Download ${v.name}">Download &#x2193;</a>
+    </div>
   `).join("");
 
   wrap.querySelectorAll("[data-video-index]").forEach(btn => {
@@ -102,13 +105,24 @@ function renderPhotoBatches(photos) {
     const next = photos.slice(shown, shown + BATCH_SIZE);
     next.forEach((p) => {
       const realIndex = photos.indexOf(p);
-      const fig = document.createElement("button");
-      fig.className = "fade-in block w-full rounded-lg overflow-hidden border";
-      fig.style.borderColor = "rgba(43,38,32,0.12)";
-      fig.setAttribute("aria-label", `Open photo: ${p.name}`);
-      fig.innerHTML = `<img src="${driveThumbUrl(p.id, 420)}" alt="${p.name}" loading="lazy" class="card-photo w-full">`;
-      fig.addEventListener("click", () => lightbox.open(photos, realIndex));
-      grid.appendChild(fig);
+      const wrap = document.createElement("div");
+      wrap.className = "fade-in group relative";
+      const btn = document.createElement("button");
+      btn.className = "block w-full rounded-lg overflow-hidden border";
+      btn.style.borderColor = "rgba(43,38,32,0.12)";
+      btn.setAttribute("aria-label", `Open photo: ${p.name}`);
+      btn.innerHTML = `<img src="${driveThumbUrl(p.id, 420)}" alt="${p.name}" loading="lazy" class="card-photo w-full">`;
+      btn.addEventListener("click", () => lightbox.open(photos, realIndex));
+      const dl = document.createElement("a");
+      dl.href = driveDownloadUrl(p.id);
+      dl.download = p.name;
+      dl.className = "absolute bottom-2 right-2 w-8 h-8 rounded-full flex items-center justify-center text-sm opacity-0 group-hover:opacity-100 transition-opacity";
+      dl.style.cssText = "background:rgba(43,38,32,0.65);color:#FBF6EC";
+      dl.title = `Download ${p.name}`;
+      dl.innerHTML = "&#x2193;";
+      wrap.appendChild(btn);
+      wrap.appendChild(dl);
+      grid.appendChild(wrap);
     });
     shown += next.length;
 
