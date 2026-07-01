@@ -26,6 +26,11 @@ function driveVideoEmbedUrl(id) {
   return `https://drive.google.com/file/d/${id}/preview`;
 }
 
+function driveVideoDirectUrl(id) {
+  if (isDemo(id)) return "https://samplelib.com/lib/preview/mp4/sample-5s.mp4";
+  return `https://drive.usercontent.google.com/download?id=${id}`;
+}
+
 function driveDownloadUrl(id) {
   if (isDemo(id)) return "#demo-download";
   return `https://drive.google.com/uc?export=download&id=${id}`;
@@ -110,11 +115,8 @@ const videoModal = {
   },
 
   open(item) {
-    const src = driveVideoEmbedUrl(item.id);
-    const el = IS_DEMO
-      ? `<video src="${src}" controls autoplay class="w-full h-full"></video>`
-      : `<iframe src="${src}" class="w-full h-full" allow="autoplay" allowfullscreen></iframe>`;
-    this.frameWrap.innerHTML = el;
+    const src = driveVideoDirectUrl(item.id);
+    this.frameWrap.innerHTML = `<video src="${src}" controls autoplay class="w-full h-full"></video>`;
     document.getElementById("video-modal-caption").textContent = item.name;
     if (this.downloadEl) {
       this.downloadEl.href = driveDownloadUrl(item.id);
@@ -176,10 +178,21 @@ const heroCollage = {
   }
 };
 
+function renderYouTubeGrid() {
+  const grid = document.getElementById("youtube-grid");
+  if (!grid) return;
+  grid.innerHTML = MEDIA.youtube.map(v => `
+    <div class="aspect-video rounded-lg overflow-hidden bg-black">
+      <iframe class="w-full h-full" src="https://www.youtube-nocookie.com/embed/${v.id}" title="${v.name}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+    </div>
+  `).join("");
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   lightbox.init();
   videoModal.init();
   heroCollage.init();
+  renderYouTubeGrid();
 
   const yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();

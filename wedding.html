@@ -76,10 +76,10 @@
 
 <!-- Lightbox -->
 <div id="lightbox" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4" style="background:rgba(20,17,13,0.92)">
-  <button id="lightbox-close" class="absolute top-5 right-5 text-white text-3xl leading-none" aria-label="Close">&times;</button>
-  <a id="lightbox-download" href="#" download class="absolute top-5 right-14 text-white text-sm leading-none hover:opacity-80" style="background:rgba(43,38,32,0.75);padding:7px 12px;border-radius:6px;backdrop-filter:blur(4px)" title="Download photo">Download &#x2193;</a>
-  <button id="lightbox-prev" class="absolute left-3 md:left-6 text-white text-4xl leading-none" aria-label="Previous photo">&#8249;</button>
-  <button id="lightbox-next" class="absolute right-3 md:right-6 text-white text-4xl leading-none" aria-label="Next photo">&#8250;</button>
+  <button id="lightbox-close" class="absolute top-5 right-5 text-white text-3xl leading-none z-20" aria-label="Close">&times;</button>
+  <a id="lightbox-download" href="#" download class="absolute top-5 left-1/2 -translate-x-1/2 text-white text-sm leading-none hover:opacity-80 z-10" style="background:rgba(43,38,32,0.75);padding:7px 12px;border-radius:6px;backdrop-filter:blur(4px)" title="Download photo">Download &#x2193;</a>
+  <button id="lightbox-prev" class="absolute left-0 md:left-0 top-0 bottom-0 w-16 md:w-24 flex items-center justify-center text-white text-4xl z-10" aria-label="Previous photo"><span class="w-12 h-12 flex items-center justify-center rounded-full" style="background:rgba(20,17,13,0.5)">&#8249;</span></button>
+  <button id="lightbox-next" class="absolute right-0 md:right-0 top-0 bottom-0 w-16 md:w-24 flex items-center justify-center text-white text-4xl z-10" aria-label="Next photo"><span class="w-12 h-12 flex items-center justify-center rounded-full" style="background:rgba(20,17,13,0.5)">&#8250;</span></button>
   <figure class="w-full" style="max-width:95vw">
     <img id="lightbox-img" src="" alt="" class="w-full object-contain" style="max-height:92vh">
     <figcaption id="lightbox-caption" class="text-center text-white/80 text-sm mt-3"></figcaption>
@@ -89,8 +89,8 @@
 <!-- Video modal -->
 <div id="video-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4" style="background:rgba(20,17,13,0.92)">
   <button id="video-modal-close" class="absolute top-5 right-5 text-white text-3xl leading-none" aria-label="Close">&times;</button>
-  <div class="max-w-3xl w-full">
-    <div id="video-frame-wrap" class="w-full aspect-video bg-black rounded-lg overflow-hidden"></div>
+  <div class="w-full" style="max-width:95vw">
+    <div id="video-frame-wrap" class="w-full bg-black rounded-lg overflow-hidden" style="aspect-ratio:16/9;max-height:85vh"></div>
     <p id="video-modal-caption" class="text-center text-white/80 text-sm mt-3"></p>
     <a id="video-modal-download" href="#" download class="block text-center text-white/60 text-xs mt-1 underline hover:text-white/90">Download video &#x2193;</a>
   </div>
