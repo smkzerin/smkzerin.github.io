@@ -43,7 +43,7 @@ Then run: node generate-data.js
 const FOLDERS = [
   // ── HOLUD ─────────────────────────────────────────────────────────────────
   {
-    id:       "1v3f_cnle9k_e11oc4_UsKWAmSXLzIEC2", // Holud/Photos/Zerin ✅
+    id:       "1lS1_X_bym99TmBPaeJ4Hs6kWh3_dc9aN", // Holud/Photos/Zerin ✅
     category: "holud",
     type:     "photo",
     person:   "zerin",
