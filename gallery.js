@@ -1,9 +1,4 @@
-/*
-  gallery.js — renders the photo grid + video row for a single category page.
-  Reads the category from <body data-category="holud|wedding">.
-  Built for scale: only renders a batch at a time ("load more"), and uses
-  loading="lazy" thumbnails so a 600+ photo folder doesn't choke the page.
-*/
+/* gallery.js — renders the photo grid + video row for a single category page */
 
 const BATCH_SIZE = 12;
 
@@ -87,19 +82,16 @@ function renderVideos(videos) {
 
 function renderPhotoBatches(photos) {
   const grid = document.getElementById("photo-grid");
-  let loadMoreBtn = document.getElementById("load-more");
+  const sentinel = document.getElementById("scroll-sentinel");
   const countEl = document.getElementById("photo-count");
   if (!grid) return;
 
-  // Reset grid + button state (this function may be called again on filter change)
   grid.innerHTML = "";
-  const freshBtn = loadMoreBtn.cloneNode(true);
-  loadMoreBtn.parentNode.replaceChild(freshBtn, loadMoreBtn);
-  loadMoreBtn = freshBtn;
 
   if (countEl) countEl.textContent = `${photos.length} photo${photos.length === 1 ? "" : "s"}`;
 
   let shown = 0;
+  let observer = null;
 
   function renderNextBatch() {
     const next = photos.slice(shown, shown + BATCH_SIZE);
@@ -126,13 +118,17 @@ function renderPhotoBatches(photos) {
     });
     shown += next.length;
 
-    if (shown >= photos.length) {
-      loadMoreBtn.classList.add("hidden");
-    } else {
-      loadMoreBtn.classList.remove("hidden");
+    if (shown >= photos.length && observer) {
+      observer.disconnect();
     }
   }
 
-  loadMoreBtn.addEventListener("click", renderNextBatch);
+  if (sentinel) {
+    observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) renderNextBatch();
+    }, { rootMargin: "200px" });
+    observer.observe(sentinel);
+  }
+
   renderNextBatch();
 }

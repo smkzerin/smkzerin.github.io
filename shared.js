@@ -1,12 +1,4 @@
-/*
-  shared.js — site-wide helpers.
-
-  DRIVE URL BUILDERS
-  Each function checks whether the file ID is a real Drive ID or a placeholder
-  (placeholder IDs always start with "DEMO-"). This means real and placeholder
-  items can coexist — no global flag to flip, no waiting until every folder
-  is scraped before seeing real photos.
-*/
+/* shared.js — site-wide helpers */
 
 const isDemo = (id) => id.startsWith("DEMO-");
 
@@ -62,6 +54,15 @@ const lightbox = {
       if (e.key === "ArrowLeft") this.step(-1);
       if (e.key === "ArrowRight") this.step(1);
     });
+
+    let touchStartX = 0;
+    this.el.addEventListener("touchstart", (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+    this.el.addEventListener("touchend", (e) => {
+      const diff = touchStartX - e.changedTouches[0].screenX;
+      if (Math.abs(diff) > 50) this.step(diff > 0 ? 1 : -1);
+    }, { passive: true });
   },
 
   open(items, index) {
@@ -134,47 +135,82 @@ const videoModal = {
   }
 };
 
-/* PHOTO COLLAGE (reused on homepage and each event page) — cycles through
-   sets of 4 featured ("cover") photos. If the page has data-category set
-   (gallery pages), the collage is filtered to that event's covers only. */
+/* CAROUSEL — full-width main image with scrollable thumbnail strip underneath */
 const heroCollage = {
-  el: null,
-  sets: [],
+  covers: [],
   index: 0,
 
   init() {
-    this.el = document.getElementById("hero-collage");
-    if (!this.el) return;
-    const category = document.body.dataset.category; // undefined on homepage = show all
-    let covers = MEDIA.photos.filter(p => p.cover);
-    if (category) covers = covers.filter(p => p.category === category);
+    if (!document.getElementById("hero-carousel")) return;
+    const category = document.body.dataset.category;
+    this.covers = MEDIA.photos.filter(p => p.cover);
+    if (category) this.covers = this.covers.filter(p => p.category === category);
 
-    this.sets = [];
-    for (let i = 0; i < covers.length; i += 4) {
-      const set = covers.slice(i, i + 4);
-      if (set.length === 4) this.sets.push(set);
-    }
-    if (this.sets.length === 0) {
-      // not enough covers for a full staggered set — hide the collage gracefully
-      this.el.closest("[data-collage-section]")?.classList.add("hidden");
+    if (this.covers.length === 0) {
+      document.querySelector("[data-collage-section]")?.classList.add("hidden");
       return;
     }
-    document.getElementById("hero-prev").addEventListener("click", () => this.step(-1));
-    document.getElementById("hero-next").addEventListener("click", () => this.step(1));
+
     this.render();
+    this.bindEvents();
   },
 
   render() {
-    const set = this.sets[this.index];
-    const slots = this.el.querySelectorAll("[data-slot]");
-    slots.forEach((slot, i) => {
-      if (set[i]) slot.src = driveThumbUrl(set[i].id, 420);
+    const cover = this.covers[this.index];
+    const main = document.getElementById("carousel-main");
+    main.src = driveFullImageUrl(cover.id);
+    main.alt = cover.name;
+
+    const thumbs = document.getElementById("carousel-thumbs");
+    thumbs.innerHTML = this.covers.map((c, i) => `
+      <button data-index="${i}" class="flex-shrink-0 rounded-md overflow-hidden border-2 transition-all" style="width:72px;height:54px;opacity:${i === this.index ? 1 : 0.5};border-color:${i === this.index ? 'var(--marigold-deep)' : 'transparent'}">
+        <img src="${driveThumbUrl(c.id, 144)}" alt="${c.name}" class="w-full h-full object-cover" loading="lazy">
+      </button>
+    `).join("");
+
+    thumbs.querySelectorAll("[data-index]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        this.index = Number(btn.dataset.index);
+        this.render();
+      });
     });
+
+    const active = thumbs.querySelector(`[data-index="${this.index}"]`);
+    if (active) active.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
   },
 
-  step(dir) {
-    this.index = (this.index + dir + this.sets.length) % this.sets.length;
-    this.render();
+  bindEvents() {
+    document.getElementById("carousel-prev")?.addEventListener("click", () => {
+      this.index = (this.index - 1 + this.covers.length) % this.covers.length;
+      this.render();
+    });
+    document.getElementById("carousel-next")?.addEventListener("click", () => {
+      this.index = (this.index + 1) % this.covers.length;
+      this.render();
+    });
+
+    const thumbs = document.getElementById("carousel-thumbs");
+    if (!thumbs) return;
+
+    thumbs.addEventListener("wheel", (e) => {
+      e.preventDefault();
+      thumbs.scrollLeft += e.deltaY;
+    }, { passive: false });
+
+    let isDown = false, startX, scrollLeft;
+    thumbs.addEventListener("mousedown", (e) => {
+      isDown = true;
+      thumbs.style.cursor = "grabbing";
+      startX = e.pageX - thumbs.offsetLeft;
+      scrollLeft = thumbs.scrollLeft;
+    });
+    thumbs.addEventListener("mouseleave", () => { isDown = false; thumbs.style.cursor = ""; });
+    thumbs.addEventListener("mouseup", () => { isDown = false; thumbs.style.cursor = ""; });
+    thumbs.addEventListener("mousemove", (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      thumbs.scrollLeft = scrollLeft - (e.pageX - thumbs.offsetLeft - startX) * 1.5;
+    });
   }
 };
 

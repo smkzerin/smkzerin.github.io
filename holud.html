@@ -38,16 +38,12 @@
   <span class="garland mx-auto block max-w-sm mb-10"></span>
 
   <section data-collage-section class="max-w-5xl mx-auto mb-12">
-    <div id="hero-collage" class="collage">
-      <img data-slot src="" alt="" class="collage-1">
-      <img data-slot src="" alt="" class="collage-2">
-      <img data-slot src="" alt="" class="collage-3">
-      <img data-slot src="" alt="" class="collage-4">
+    <div id="hero-carousel" class="relative">
+      <img id="carousel-main" src="" alt="" class="w-full rounded-lg object-cover" style="background:var(--paper)">
+      <button id="carousel-prev" class="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center text-white text-2xl rounded-full z-10" style="background:rgba(43,38,32,0.5)" aria-label="Previous photo">&#8249;</button>
+      <button id="carousel-next" class="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center text-white text-2xl rounded-full z-10" style="background:rgba(43,38,32,0.5)" aria-label="Next photo">&#8250;</button>
     </div>
-    <div class="flex justify-end gap-2 mt-3">
-      <button id="hero-prev" class="collage-arrow border" style="border-color:var(--marigold-deep); color:var(--marigold-deep)" aria-label="Previous photos">&#8249;</button>
-      <button id="hero-next" class="collage-arrow" style="background:var(--marigold-deep); color:var(--cream)" aria-label="Next photos">&#8250;</button>
-    </div>
+    <div id="carousel-thumbs" class="flex gap-2 mt-3 overflow-x-auto pb-1 cursor-pointer select-none" style="scroll-behavior:smooth;scrollbar-width:none;-ms-overflow-style:none"></div>
   </section>
 
   <section class="max-w-5xl mx-auto mb-12">
@@ -65,9 +61,7 @@
     <div id="person-filter" class="hidden flex gap-2 mb-5 flex-wrap"></div>
 
     <div id="photo-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 md:gap-4"></div>
-    <div class="flex justify-center mt-8">
-      <button id="load-more" class="px-6 py-3 rounded-full text-sm border" style="border-color:rgba(43,38,32,0.2)">Load more</button>
-    </div>
+    <div id="scroll-sentinel" class="h-4"></div>
   </section>
 </main>
 
