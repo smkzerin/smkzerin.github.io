@@ -183,7 +183,7 @@ function renderYouTubeGrid() {
   if (!grid) return;
   grid.innerHTML = MEDIA.youtube.map(v => `
     <div class="aspect-video rounded-lg overflow-hidden bg-black">
-      <iframe class="w-full h-full" src="https://www.youtube-nocookie.com/embed/${v.id}" title="${v.name}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+      <iframe class="w-full h-full" src="https://www.youtube-nocookie.com/embed/${v.id}" title="${v.name}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
     </div>
   `).join("");
 }
