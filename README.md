@@ -1,4 +1,4 @@
-# Tamaz & Shoumik — wedding showcase (demo)
+# Zerin & Shoumik — wedding showcase (demo)
 
 This is a working demo built with plain HTML, vanilla JS, and Tailwind (via CDN, no build step).
 All photos/videos right now are **placeholders** (Picsum images + a sample clip) — no real
