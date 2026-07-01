@@ -1,11 +1,10 @@
 name: Generate data.js from Google Drive
 
 on:
-  # Run manually from the GitHub Actions tab whenever you've uploaded new photos
   workflow_dispatch:
-  # Optionally also run on a schedule (uncomment to enable)
-  # schedule:
-  #   - cron: '0 6 * * *'   # every day at 6am UTC
+
+permissions:
+  contents: write
 
 jobs:
   generate:
