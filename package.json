@@ -1,0 +1,13 @@
+{
+  "name": "zerin-page",
+  "version": "1.0.0",
+  "description": "This is a working demo built with plain HTML, vanilla JS, and Tailwind (via CDN, no build step). All photos/videos right now are **placeholders** (Picsum images + a sample clip) — no real Google Drive files are wired in yet.",
+  "main": "data.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}

@@ -7,30 +7,62 @@ Google Drive files are wired in yet.
 Three events are covered: Holud (night one), Wedding (night two), and Reception / Bou-Bhaat
 (night three, the day after the wedding).
 
+## Drive folder structure to follow when uploading
+
+Holud and Wedding/Reception live on separate Drive accounts. Follow this structure exactly —
+the fetch script uses subfolder names to set `category`, `type`, and `person` automatically,
+so no manual renaming of individual files is needed.
+
+```
+[Holud Drive account]
+└── Holud Night/
+    ├── Photos/
+    │   ├── Zerin/       ← bride's photos (person: "zerin")
+    │   └── Shoumik/     ← groom's photos (person: "shoumik")
+    ├── Videos/
+    └── Covers/          ← 4–12 favourite shots for the page's staggered collage
+
+[Wedding + Reception Drive account]
+└── Wedding Night/
+    ├── Photos/
+    ├── Videos/
+    └── Covers/
+
+└── Reception/
+    ├── Photos/
+    ├── Videos/
+    └── Covers/
+```
+
+**Key rules:**
+- Filenames can stay exactly as-is from your camera (IMG_xxxx.jpg, etc.)
+- Everything inside `Photos/Zerin/` gets `person: "zerin"` automatically
+- Everything inside `Photos/Shoumik/` gets `person: "shoumik"` automatically
+- Photos in a `Covers/` subfolder get `cover: true` (used by the per-page staggered collage)
+- Set sharing on every top-level folder to **"Anyone with the link — Viewer"**
+
+## On the website
+- **Holud page** — shows a "All / Zerin / Shoumik" tab filter above the photo grid
+- **Wedding & Reception pages** — no filter tabs (photos are not person-split there)
+- Every page shows a staggered collage at the top sourced from that event's own Covers folder
+
 ## Structure
-- `index.html` — homepage with a staggered, rotated photo collage hero (cycles through sets of 4 featured photos across all three events) and links into each event
-- `holud.html`, `wedding.html`, `reception.html` — galleries, each with their own staggered collage sourced only from that event's own "cover" photos, plus a video row and lazy-loaded "load more" photo grid
-- `downloads.html` — per-file download list + whole-folder shortcuts, grouped by all three events
-- `js/data.js` — the media manifest (currently placeholder data). Items flagged `cover: true` are what feed the collages.
-- `js/shared.js` — Drive URL builders, lightbox, video modal, collage cycling (filters by `data-category` on `<body>` when present, so each event page only shows its own covers)
-- `js/gallery.js` — gallery rendering / batching logic
-- `css/style.css` — fonts, color tokens, the marigold "garland" divider, collage layout
+- `index.html` — homepage with staggered photo collage hero and event cards
+- `holud.html` — Holud gallery with Zerin/Shoumik person filter tabs
+- `wedding.html`, `reception.html` — galleries (collage + video row + lazy photo grid)
+- `downloads.html` — per-file download list + whole-folder shortcuts for all three events
+- `js/data.js` — media manifest (placeholder data; replaced by generated JSON from fetch script)
+- `js/shared.js` — Drive URL builders, lightbox, video modal, collage cycling
+- `js/gallery.js` — gallery rendering, person-filter tabs, lazy batching
+- `css/style.css` — fonts, color tokens, garland divider, collage layout
 
 ## Swapping in real files later
-Once you upload the real photos/videos to Drive (separate Holud and Wedding accounts, plus
-wherever Reception ends up):
-1. We'll run a fetch script against each Drive account/folder to list contents and generate real
-   `id` / `name` / `category` / `type` entries — same shape as what's in `js/data.js` now.
-   Anything in a `Covers` subfolder gets `cover: true` automatically.
-2. That generated JSON replaces the placeholder arrays in `js/data.js`.
-3. In `js/shared.js`, flip `const IS_DEMO = true;` to `false` — this switches the thumbnail/
-   download URL builders from Picsum placeholders to real Drive URLs.
-
-No other code changes needed — pages, lightbox, video modal, collages, and downloads list all
-read from the same manifest shape regardless of whether it's demo or real data.
-
-## Notes
-- Couple names, date, and copy are placeholders — easy to find/replace across the HTML files.
-- Cover photos on the homepage event cards currently point at Picsum; swap for real cover image URLs once available.
-- Each event page's collage needs at least 4 `cover: true` photos in that category to display — fewer than that, and the collage section hides itself automatically rather than showing a broken layout.
+Once you've uploaded everything and shared the folders:
+1. Share the two Drive folder links/IDs with me
+2. I'll run the fetch script against both accounts — it walks Photos/Zerin, Photos/Shoumik,
+   Videos, and Covers subfolders and generates a real `data.js` with correct category, type,
+   person, and cover flags
+3. Replace `js/data.js` with the generated file
+4. In `js/shared.js`, flip `const IS_DEMO = true;` → `false`
+5. Push to GitHub — site now shows real content, no other changes needed
 

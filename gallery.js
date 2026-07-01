@@ -13,8 +13,49 @@ document.addEventListener("DOMContentLoaded", () => {
   const videos = MEDIA.videos.filter(v => v.category === category);
 
   renderVideos(videos);
-  renderPhotoBatches(photos);
+  renderPersonFilter(photos);
 });
+
+function renderPersonFilter(photos) {
+  const wrap = document.getElementById("person-filter");
+  const persons = [...new Set(photos.filter(p => p.person).map(p => p.person))];
+
+  // Only show tabs if this category actually has person-tagged photos (e.g. Holud)
+  if (!wrap || persons.length < 2) {
+    renderPhotoBatches(photos);
+    return;
+  }
+
+  const label = (p) => p.charAt(0).toUpperCase() + p.slice(1);
+  const tabs = ["all", ...persons];
+
+  wrap.classList.remove("hidden");
+  wrap.innerHTML = tabs.map((t, i) => `
+    <button data-tab="${t}" class="px-4 py-2 rounded-full text-xs uppercase tracking-wide border ${i === 0 ? "active-tab" : ""}"
+      style="border-color:rgba(43,38,32,0.2)">${t === "all" ? "All" : label(t)}</button>
+  `).join("");
+
+  function applyTabStyles(activeTab) {
+    wrap.querySelectorAll("[data-tab]").forEach(btn => {
+      const isActive = btn.dataset.tab === activeTab;
+      btn.style.background = isActive ? "var(--marigold-deep)" : "transparent";
+      btn.style.color = isActive ? "var(--cream)" : "var(--charcoal)";
+      btn.style.borderColor = isActive ? "var(--marigold-deep)" : "rgba(43,38,32,0.2)";
+    });
+  }
+
+  wrap.querySelectorAll("[data-tab]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const tab = btn.dataset.tab;
+      applyTabStyles(tab);
+      const filtered = tab === "all" ? photos : photos.filter(p => p.person === tab);
+      renderPhotoBatches(filtered);
+    });
+  });
+
+  applyTabStyles("all");
+  renderPhotoBatches(photos);
+}
 
 function renderVideos(videos) {
   const wrap = document.getElementById("video-row");
@@ -43,9 +84,15 @@ function renderVideos(videos) {
 
 function renderPhotoBatches(photos) {
   const grid = document.getElementById("photo-grid");
-  const loadMoreBtn = document.getElementById("load-more");
+  let loadMoreBtn = document.getElementById("load-more");
   const countEl = document.getElementById("photo-count");
   if (!grid) return;
+
+  // Reset grid + button state (this function may be called again on filter change)
+  grid.innerHTML = "";
+  const freshBtn = loadMoreBtn.cloneNode(true);
+  loadMoreBtn.parentNode.replaceChild(freshBtn, loadMoreBtn);
+  loadMoreBtn = freshBtn;
 
   if (countEl) countEl.textContent = `${photos.length} photo${photos.length === 1 ? "" : "s"}`;
 

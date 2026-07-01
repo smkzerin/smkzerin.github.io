@@ -2,31 +2,32 @@
   shared.js — site-wide helpers.
 
   DRIVE URL BUILDERS
-  Once real files are uploaded, file.id will be a real Google Drive file ID
-  and these functions produce the correct embeddable / downloadable URLs.
-  For this demo, IDs are fake, so we fall back to placeholder image/video
-  services so you can see real visuals while reviewing.
+  Each function checks whether the file ID is a real Drive ID or a placeholder
+  (placeholder IDs always start with "DEMO-"). This means real and placeholder
+  items can coexist — no global flag to flip, no waiting until every folder
+  is scraped before seeing real photos.
 */
 
-const IS_DEMO = true; // flip to false once real Drive IDs are in data.js
+const isDemo = (id) => id.startsWith("DEMO-");
 
 function driveThumbUrl(id, width = 480) {
-  if (IS_DEMO) return `https://picsum.photos/seed/${encodeURIComponent(id)}/${width}/${Math.round(width * 1.25)}`;
+  if (isDemo(id)) return `https://picsum.photos/seed/${encodeURIComponent(id)}/${width}/${Math.round(width * 1.25)}`;
   return `https://drive.google.com/thumbnail?id=${id}&sz=w${width}`;
 }
 
 function driveFullImageUrl(id) {
-  if (IS_DEMO) return `https://picsum.photos/seed/${encodeURIComponent(id)}/1400/1750`;
-  return `https://drive.google.com/uc?export=view&id=${id}`;
+  if (isDemo(id)) return `https://picsum.photos/seed/${encodeURIComponent(id)}/1400/1750`;
+  // lh3.googleusercontent.com/d/ID serves the original full-resolution file
+  return `https://lh3.googleusercontent.com/d/${id}`;
 }
 
 function driveVideoEmbedUrl(id) {
-  if (IS_DEMO) return "https://samplelib.com/lib/preview/mp4/sample-5s.mp4";
+  if (isDemo(id)) return "https://samplelib.com/lib/preview/mp4/sample-5s.mp4";
   return `https://drive.google.com/file/d/${id}/preview`;
 }
 
 function driveDownloadUrl(id) {
-  if (IS_DEMO) return "#demo-download";
+  if (isDemo(id)) return "#demo-download";
   return `https://drive.google.com/uc?export=download&id=${id}`;
 }
 

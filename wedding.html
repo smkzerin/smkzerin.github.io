@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="style.css">
 </head>
 <body class="min-h-screen flex flex-col" data-category="wedding">
 
@@ -60,6 +60,9 @@
       <h2 class="font-display text-2xl" style="color:var(--charcoal)">Photos</h2>
       <span id="photo-count" class="text-xs" style="color:rgba(43,38,32,0.5)"></span>
     </div>
+    <!-- Person filter placeholder (hidden on non-Holud pages) -->
+    <div id="person-filter" class="hidden flex gap-2 mb-5 flex-wrap"></div>
+
     <div id="photo-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 md:gap-4"></div>
     <div class="flex justify-center mt-8">
       <button id="load-more" class="px-6 py-3 rounded-full text-sm border" style="border-color:rgba(43,38,32,0.2)">Load more</button>
@@ -76,8 +79,8 @@
   <button id="lightbox-close" class="absolute top-5 right-5 text-white text-3xl leading-none" aria-label="Close">&times;</button>
   <button id="lightbox-prev" class="absolute left-3 md:left-6 text-white text-4xl leading-none" aria-label="Previous photo">&#8249;</button>
   <button id="lightbox-next" class="absolute right-3 md:right-6 text-white text-4xl leading-none" aria-label="Next photo">&#8250;</button>
-  <figure class="max-w-3xl w-full">
-    <img id="lightbox-img" src="" alt="" class="w-full max-h-[75vh] object-contain rounded-lg">
+  <figure class="w-full" style="max-width:95vw">
+    <img id="lightbox-img" src="" alt="" class="w-full object-contain" style="max-height:92vh">
     <figcaption id="lightbox-caption" class="text-center text-white/80 text-sm mt-3"></figcaption>
   </figure>
 </div>
@@ -91,8 +94,8 @@
   </div>
 </div>
 
-<script src="js/data.js"></script>
-<script src="js/shared.js"></script>
-<script src="js/gallery.js"></script>
+<script src="data.js"></script>
+<script src="shared.js"></script>
+<script src="gallery.js"></script>
 </body>
 </html>
