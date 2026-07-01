@@ -5212,5 +5212,8 @@ const MEDIA = {
     "type": "video"
   }
 ],
-  youtube: []
+  youtube: [
+    { id: "4ipYp1cSbM8", name: "Wedding highlight" },
+    { id: "dkyEfliyAr4", name: "Ceremony recap" },
+  ]
 };

@@ -15,7 +15,7 @@
  * Requires Node 18+. No npm installs needed.
  */
 
-import { writeFileSync, mkdirSync, existsSync } from "fs";
+import { writeFileSync, readFileSync, mkdirSync, existsSync } from "fs";
 import { resolve, dirname } from "path";
 import { fileURLToPath } from "url";
 
@@ -166,6 +166,16 @@ async function listDriveFolder(folderId) {
   return allFiles;
 }
 
+// ── PRESERVE EXISTING YOUTUBE DATA ────────────────────────────────────────────
+// Read current data.js so manually-added youtube entries survive regeneration
+let existingYoutube = [];
+try {
+  const currentPath = resolve(__dirname, "data.js");
+  const currentSrc = readFileSync(currentPath, "utf8");
+  const match = currentSrc.match(/youtube:\s*(\[[\s\S]*?\])\s*\n\s*\};/);
+  if (match) existingYoutube = JSON.parse(match[1]);
+} catch { /* first run — no file yet */ }
+
 // ── MAIN ──────────────────────────────────────────────────────────────────────
 const photos = [];
 const videos = [];
@@ -225,7 +235,7 @@ const output = `/*
 const MEDIA = {
   photos: ${JSON.stringify(photos, null, 2)},
   videos: ${JSON.stringify(videos, null, 2)},
-  youtube: []
+  youtube: ${JSON.stringify(existingYoutube, null, 2)}
 };
 `;
 

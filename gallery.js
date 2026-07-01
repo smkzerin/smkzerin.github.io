@@ -1,6 +1,7 @@
 /* gallery.js — renders the photo grid + video row for a single category page */
 
 const BATCH_SIZE = 12;
+let scrollObserver = null;
 
 document.addEventListener("DOMContentLoaded", () => {
   const category = document.body.dataset.category;
@@ -90,8 +91,9 @@ function renderPhotoBatches(photos) {
 
   if (countEl) countEl.textContent = `${photos.length} photo${photos.length === 1 ? "" : "s"}`;
 
+  if (scrollObserver) scrollObserver.disconnect();
+
   let shown = 0;
-  let observer = null;
 
   function renderNextBatch() {
     const next = photos.slice(shown, shown + BATCH_SIZE);
@@ -118,16 +120,16 @@ function renderPhotoBatches(photos) {
     });
     shown += next.length;
 
-    if (shown >= photos.length && observer) {
-      observer.disconnect();
+    if (shown >= photos.length && scrollObserver) {
+      scrollObserver.disconnect();
     }
   }
 
   if (sentinel) {
-    observer = new IntersectionObserver((entries) => {
+    scrollObserver = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) renderNextBatch();
     }, { rootMargin: "200px" });
-    observer.observe(sentinel);
+    scrollObserver.observe(sentinel);
   }
 
   renderNextBatch();
