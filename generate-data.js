@@ -50,11 +50,11 @@ const FOLDERS = [
     skip:     false,
   },
   {
-    id:       "HOLUD_PHOTOS_SHOUMIK_FOLDER_ID",
+    id:       "1s1aNeE0UsVAbz3GwMzWqOwMuokintkZw", // Holud/Photos/Shoumik ✅
     category: "holud",
     type:     "photo",
     person:   "shoumik",
-    skip:     true,
+    skip:     false,
   },
   {
     id:       "HOLUD_VIDEOS_FOLDER_ID",

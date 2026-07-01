@@ -73,7 +73,7 @@ node generate-data.js
 | Folder | ID in generate-data.js | skip |
 |--------|------------------------|------|
 | Holud/Photos/Zerin     | ✅ real ID | false |
-| Holud/Photos/Shoumik   | ⏳ placeholder | true |
+| Holud/Photos/Shoumik   | ✅ real ID | false |
 | Holud/Videos           | ⏳ placeholder | true |
 | Holud/Covers           | ⏳ placeholder | true |
 | Wedding/Photos         | ⏳ placeholder | true |
