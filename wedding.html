@@ -8,6 +8,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="style.css">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="icon" type="image/x-icon" href="icons/favicon.ico">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#7A2436">
+<meta name="apple-mobile-web-app-capable" content="yes">
 </head>
 <body class="min-h-screen flex flex-col" data-category="wedding">
 
@@ -99,6 +104,14 @@
     <a id="video-modal-download" href="#" download class="block text-center text-white/60 text-xs mt-1 underline hover:text-white/90">Download video &#x2193;</a>
   </div>
 </div>
+
+<button id="pwa-install-btn" class="pwa-install-btn hidden" aria-label="Install app">
+  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+    <polyline points="7 10 12 15 17 10"/>
+    <line x1="12" y1="15" x2="12" y2="3"/>
+  </svg>
+</button>
 
 <script src="data.js"></script>
 <script src="shared.js"></script>

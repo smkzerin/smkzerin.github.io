@@ -1,0 +1,21 @@
+{
+  "name": "Zerin & Shoumik — Wedding Showcase",
+  "short_name": "Zerin & Shoumik",
+  "description": "Holud and wedding night photos and videos",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FBF6EC",
+  "theme_color": "#7A2436",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

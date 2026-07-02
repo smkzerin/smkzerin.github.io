@@ -57,13 +57,13 @@ const FOLDERS = [
     skip:     false,
   },
   {
-    id:       "HOLUD_VIDEOS_FOLDER_ID",
+    id:       "1EF4U831ZIw1oAm8K33T8-V95oKuwQmAh",
     category: "holud",
     type:     "video",
     skip:     true,
   },
   {
-    id:       "HOLUD_COVERS_FOLDER_ID",
+    id:       "1_PMCD3MrfLoU4m6JyRtGNBcVBt7Kgl9O",
     category: "holud",
     type:     "photo",
     cover:    true,
@@ -78,13 +78,13 @@ const FOLDERS = [
     skip:     false,
   },
   {
-    id:       "WEDDING_VIDEOS_FOLDER_ID",
+    id:       "1faJuP0o4ycnRPZCZ8hIYCf3un7yzWuDh",
     category: "wedding",
     type:     "video",
     skip:     true,
   },
   {
-    id:       "WEDDING_COVERS_FOLDER_ID",
+    id:       "1Oj-6KRfyeT54IphIhYhahZuiUDOc6JoC",
     category: "wedding",
     type:     "photo",
     cover:    true,
@@ -93,19 +93,19 @@ const FOLDERS = [
 
   // ── RECEPTION ─────────────────────────────────────────────────────────────
   {
-    id:       "RECEPTION_PHOTOS_FOLDER_ID",
+    id:       "1PeR9AiyZP8VLEUnvv_UFlyK0wr4Pt983",
     category: "reception",
     type:     "photo",
     skip:     true,
   },
   {
-    id:       "RECEPTION_VIDEOS_FOLDER_ID",
+    id:       "1vhQsTFlDSfmczOveN9Hfp2Yaea2LQ6kj",
     category: "reception",
     type:     "video",
     skip:     true,
   },
   {
-    id:       "RECEPTION_COVERS_FOLDER_ID",
+    id:       "1DK2YFdnOvD31mhi1ufBumwZuppcIv7nV",
     category: "reception",
     type:     "photo",
     cover:    true,

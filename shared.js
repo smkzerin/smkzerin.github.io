@@ -234,6 +234,36 @@ const heroCollage = {
   }
 };
 
+/* PWA - service worker registration + install button */
+let pwaInstallPrompt = null;
+
+window.addEventListener("beforeinstallprompt", (e) => {
+  e.preventDefault();
+  pwaInstallPrompt = e;
+  const btn = document.getElementById("pwa-install-btn");
+  if (btn) btn.classList.remove("hidden");
+});
+
+document.addEventListener("click", (e) => {
+  const btn = e.target.closest("#pwa-install-btn");
+  if (!btn || !pwaInstallPrompt) return;
+  pwaInstallPrompt.prompt();
+  pwaInstallPrompt.userChoice.then(() => {
+    pwaInstallPrompt = null;
+    btn.classList.add("hidden");
+  });
+});
+
+window.addEventListener("appinstalled", () => {
+  pwaInstallPrompt = null;
+  const btn = document.getElementById("pwa-install-btn");
+  if (btn) btn.classList.add("hidden");
+});
+
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("sw.js");
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   lightbox.init();
   videoModal.init();

@@ -74,13 +74,13 @@ node generate-data.js
 |--------|------------------------|------|
 | Holud/Photos/Zerin     | ✅ real ID | false |
 | Holud/Photos/Shoumik   | ✅ real ID | false |
-| Holud/Videos           | ⏳ placeholder | true |
-| Holud/Covers           | ⏳ placeholder | true |
+| Holud/Videos           | ✅ real ID | true |
+| Holud/Covers           | ✅ real ID | true |
 | Wedding/Photos         | ✅ real ID | false |
-| Wedding/Videos         | ⏳ placeholder | true |
-| Wedding/Covers         | ⏳ placeholder | true |
-| Reception/Photos       | ⏳ placeholder | true |
-| Reception/Videos       | ⏳ placeholder | true |
-| Reception/Covers       | ⏳ placeholder | true |
+| Wedding/Videos         | ✅ real ID | true |
+| Wedding/Covers         | ✅ real ID | true |
+| Reception/Photos       | ✅ real ID | true |
+| Reception/Videos       | ✅ real ID | true |
+| Reception/Covers       | ✅ real ID | true |
 
 Update this table as you go.
