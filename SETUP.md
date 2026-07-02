@@ -79,8 +79,8 @@ node generate-data.js
 | Wedding/Photos         | ✅ real ID | false |
 | Wedding/Videos         | ✅ real ID | true |
 | Wedding/Covers         | ✅ real ID | true |
-| Reception/Photos       | ✅ real ID | true |
-| Reception/Videos       | ✅ real ID | true |
-| Reception/Covers       | ✅ real ID | true |
+| Reception/Photos       | ✅ real ID | false |
+| Reception/Videos       | ✅ real ID | false |
+| Reception/Covers       | ✅ real ID | false |
 
 Update this table as you go.

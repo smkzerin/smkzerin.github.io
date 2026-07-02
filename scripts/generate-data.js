@@ -96,20 +96,20 @@ const FOLDERS = [
     id:       "1PeR9AiyZP8VLEUnvv_UFlyK0wr4Pt983",
     category: "reception",
     type:     "photo",
-    skip:     true,
+    skip:     false,
   },
   {
     id:       "1vhQsTFlDSfmczOveN9Hfp2Yaea2LQ6kj",
     category: "reception",
     type:     "video",
-    skip:     true,
+    skip:     false,
   },
   {
     id:       "1DK2YFdnOvD31mhi1ufBumwZuppcIv7nV",
     category: "reception",
     type:     "photo",
     cover:    true,
-    skip:     true,
+    skip:     false,
   },
 ];
 
