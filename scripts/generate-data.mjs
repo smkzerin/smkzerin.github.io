@@ -36,6 +36,11 @@ Then run: node generate-data.mjs
   process.exit(1);
 }
 
+// ── THUMBNAILS FOLDER ─────────────────────────────────────────────────────────
+// A single folder that holds custom thumbnail images for videos.
+// Name each image file after the video's Drive file ID (e.g. "1abc123.jpg").
+const THUMBNAILS_FOLDER_ID = "1Iunwqjp0sU1KXzVeWP0FVnlp0z6WKZLd";
+
 // ── FOLDER CONFIG ─────────────────────────────────────────────────────────────
 // Set each folder's Drive ID and skip:false once it's been uploaded.
 // Folder IDs come from the share URL:
@@ -166,6 +171,22 @@ async function listDriveFolder(folderId) {
   return allFiles;
 }
 
+// ── THUMBNAIL MAP ──────────────────────────────────────────────────────────────
+// Fetch the Thumbnails folder and build a lookup: videoDriveId → thumbnailFileId
+const thumbMap = {};
+try {
+  const thumbFiles = await listDriveFolder(THUMBNAILS_FOLDER_ID);
+  for (const f of thumbFiles) {
+    if (f.mimeType.startsWith("image/")) {
+      const name = f.name.replace(/\.[^.]+$/, "");
+      thumbMap[name] = f.id;
+    }
+  }
+  console.log(`✓  Thumbnails: ${Object.keys(thumbMap).length} custom thumbnails loaded`);
+} catch (err) {
+  console.error(`⚠  Thumbnails: ${err.message} — continuing without custom thumbnails`);
+}
+
 // ── MAIN ──────────────────────────────────────────────────────────────────────
 const photos = [];
 const videos = [];
@@ -195,6 +216,7 @@ for (const folder of FOLDERS) {
         const item = { id: f.id, name: f.name, category: folder.category, type: folder.type };
         if (folder.person) item.person = folder.person;
         if (folder.cover)  item.cover  = true;
+        if (folder.type === "video" && thumbMap[f.id]) item.thumbId = thumbMap[f.id];
         return item;
       });
 
@@ -220,6 +242,7 @@ const output = `/*
     type      -> "photo" | "video"
     person    -> "zerin" | "shoumik"   (Holud photos only)
     cover     -> true                  (items from Covers subfolder)
+    thumbId   -> Drive file ID of custom thumbnail image (video items only)
 */
 
 const MEDIA = {

@@ -63,7 +63,7 @@ function renderVideos(videos) {
   wrap.innerHTML = videos.map((v, i) => `
     <div class="relative flex-shrink-0 w-56">
       <button class="group relative w-full rounded-lg overflow-hidden border" style="border-color:rgba(43,38,32,0.12)" data-video-index="${i}">
-        <img src="${driveVideoThumbUrl(v.id, 320)}" alt="${v.name}" loading="lazy" class="w-full h-36 object-cover transition duration-300 group-hover:scale-105">
+        <img src="${driveVideoThumbUrl(v.id, v.thumbId, 320)}" alt="${v.name}" loading="lazy" class="w-full h-36 object-cover transition duration-300 group-hover:scale-105">
         <span class="absolute inset-0 flex items-center justify-center">
           <span class="w-11 h-11 rounded-full flex items-center justify-center text-lg" style="background:rgba(43,38,32,0.55);color:#FBF6EC">&#9658;</span>
         </span>
