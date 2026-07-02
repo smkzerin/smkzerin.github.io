@@ -69,7 +69,7 @@ function renderVideos(videos) {
         </span>
         <span class="absolute bottom-0 left-0 right-0 px-3 py-2 text-xs text-left" style="background:linear-gradient(to top, rgba(43,38,32,0.85), transparent);color:#FBF6EC">${v.name}</span>
       </button>
-      <a href="${driveDownloadUrl(v.id)}" download="${v.name}" class="block mt-1.5 text-xs text-center underline" style="color:var(--charcoal)" title="Download ${v.name}">Download &#x2193;</a>
+      <a href="${driveDownloadUrl(v.id)}" download="${v.name}" class="block mt-1.5 text-xs text-center underline" style="color:var(--charcoal)" title="Download ${v.name}"><svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:-1px;margin-right:2px"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Download</a>
     </div>
   `).join("");
 
@@ -113,7 +113,7 @@ function renderPhotoBatches(photos) {
       dl.className = "absolute bottom-2 right-2 w-8 h-8 rounded-full flex items-center justify-center text-sm opacity-0 group-hover:opacity-100 transition-opacity";
       dl.style.cssText = "background:rgba(43,38,32,0.65);color:#FBF6EC";
       dl.title = `Download ${p.name}`;
-      dl.innerHTML = "&#x2193;";
+      dl.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>';
       wrap.appendChild(btn);
       wrap.appendChild(dl);
       grid.appendChild(wrap);

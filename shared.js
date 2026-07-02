@@ -240,18 +240,27 @@ let pwaInstallPrompt = null;
 window.addEventListener("beforeinstallprompt", (e) => {
   e.preventDefault();
   pwaInstallPrompt = e;
-  const btn = document.getElementById("pwa-install-btn");
-  if (btn) btn.classList.remove("hidden");
 });
+
+function showPwaToast() {
+  const toast = document.getElementById("pwa-toast");
+  if (!toast) return;
+  toast.classList.remove("hidden");
+  setTimeout(() => toast.classList.add("hidden"), 4000);
+}
 
 document.addEventListener("click", (e) => {
   const btn = e.target.closest("#pwa-install-btn");
-  if (!btn || !pwaInstallPrompt) return;
-  pwaInstallPrompt.prompt();
-  pwaInstallPrompt.userChoice.then(() => {
-    pwaInstallPrompt = null;
-    btn.classList.add("hidden");
-  });
+  if (!btn) return;
+  if (pwaInstallPrompt) {
+    pwaInstallPrompt.prompt();
+    pwaInstallPrompt.userChoice.then(() => {
+      pwaInstallPrompt = null;
+      btn.classList.add("hidden");
+    });
+  } else {
+    showPwaToast();
+  }
 });
 
 window.addEventListener("appinstalled", () => {

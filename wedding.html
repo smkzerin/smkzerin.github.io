@@ -86,7 +86,7 @@
 <!-- Lightbox -->
 <div id="lightbox" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4" style="background:rgba(20,17,13,0.92)">
   <button id="lightbox-close" class="absolute top-5 right-5 text-white text-3xl leading-none z-20" aria-label="Close">&times;</button>
-  <a id="lightbox-download" href="#" download class="absolute top-5 left-1/2 -translate-x-1/2 text-white text-sm leading-none hover:opacity-80 z-10" style="background:rgba(43,38,32,0.75);padding:7px 12px;border-radius:6px;backdrop-filter:blur(4px)" title="Download photo">Download &#x2193;</a>
+      <a id="lightbox-download" href="#" download class="absolute top-5 left-1/2 -translate-x-1/2 text-white text-sm leading-none hover:opacity-80 z-10" style="background:rgba(43,38,32,0.75);padding:7px 12px;border-radius:6px;backdrop-filter:blur(4px)" title="Download photo"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:-2px;margin-right:4px"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Download</a>
   <button id="lightbox-prev" class="absolute left-0 md:left-0 top-0 bottom-0 w-16 md:w-24 flex items-center justify-center text-white text-4xl z-10" aria-label="Previous photo"><span class="w-12 h-12 flex items-center justify-center rounded-full" style="background:rgba(20,17,13,0.5)">&#8249;</span></button>
   <button id="lightbox-next" class="absolute right-0 md:right-0 top-0 bottom-0 w-16 md:w-24 flex items-center justify-center text-white text-4xl z-10" aria-label="Next photo"><span class="w-12 h-12 flex items-center justify-center rounded-full" style="background:rgba(20,17,13,0.5)">&#8250;</span></button>
   <figure class="w-full" style="max-width:95vw">
@@ -105,13 +105,15 @@
   </div>
 </div>
 
-<button id="pwa-install-btn" class="pwa-install-btn hidden" aria-label="Install app">
+<button id="pwa-install-btn" class="pwa-install-btn" aria-label="Install app">
   <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
     <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
     <polyline points="7 10 12 15 17 10"/>
     <line x1="12" y1="15" x2="12" y2="3"/>
   </svg>
 </button>
+
+<div id="pwa-toast" class="pwa-toast hidden">Install not supported on this browser. Try Chrome or Edge.</div>
 
 <script src="data.js"></script>
 <script src="shared.js"></script>
