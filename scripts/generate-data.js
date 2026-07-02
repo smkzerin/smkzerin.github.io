@@ -228,8 +228,8 @@ const MEDIA = {
 };
 `;
 
-// Write alongside the HTML files (flat structure)
-const outPath = resolve(__dirname, "data.js");
+// Write to the JavaScript assets folder used by the site
+const outPath = resolve(__dirname, "../js/data.js");
 writeFileSync(outPath, output, "utf8");
 
 console.log(`\n✅  data.js written to: ${outPath}`);

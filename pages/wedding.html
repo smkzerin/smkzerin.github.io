@@ -3,24 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Holud night — Zerin &amp; Shoumik</title>
+<title>Wedding night — Zerin &amp; Shoumik</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet" href="style.css">
-<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
-<link rel="icon" type="image/x-icon" href="icons/favicon.ico">
-<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="icon" type="image/png" sizes="192x192" href="../icons/icon-192.png">
+<link rel="icon" type="image/x-icon" href="../icons/favicon.ico">
+<link rel="manifest" href="../manifest.json">
 <meta name="theme-color" content="#7A2436">
 <meta name="apple-mobile-web-app-capable" content="yes">
 </head>
-<body class="min-h-screen flex flex-col" data-category="holud">
+<body class="min-h-screen flex flex-col" data-category="wedding">
 
 <header class="px-6 md:px-10 py-6 flex items-center justify-between">
-  <a href="/" class="text-xs tracking-[0.2em] uppercase" style="color:var(--maroon)">Zerin &amp; Shoumik</a>
+  <a href="../" class="text-xs tracking-[0.2em] uppercase" style="color:var(--maroon)">Zerin &amp; Shoumik</a>
   <nav class="hidden md:flex gap-8 text-xs tracking-[0.1em] uppercase">
-    <a href="holud" class="font-medium" style="color:var(--marigold-deep)">Holud</a>
-    <a href="wedding" class="hover:opacity-70">Wedding</a>
+    <a href="holud" class="hover:opacity-70">Holud</a>
+    <a href="wedding" class="font-medium" style="color:var(--marigold-deep)">Wedding</a>
     <a href="reception" class="hover:opacity-70">Reception</a>
     <a href="downloads" class="hover:opacity-70">Downloads</a>
   </nav>
@@ -35,9 +35,9 @@
 
 <main class="flex-1 px-6 md:px-10 pb-16">
   <section class="pt-4 pb-8 text-center max-w-2xl mx-auto">
-    <p class="text-xs tracking-[0.25em] uppercase mb-3" style="color:var(--marigold-deep)">Night one</p>
-    <h1 class="font-display text-4xl md:text-5xl" style="color:var(--maroon)">Holud</h1>
-    <p class="mt-3 text-sm font-light" style="color:rgba(43,38,32,0.75)">Turmeric, marigolds, and dancing before the big day.</p>
+    <p class="text-xs tracking-[0.25em] uppercase mb-3" style="color:var(--marigold-deep)">Night two</p>
+    <h1 class="font-display text-4xl md:text-5xl" style="color:var(--maroon)">Wedding</h1>
+    <p class="mt-3 text-sm font-light" style="color:rgba(43,38,32,0.75)">Vows, the ceremony, and everything in between.</p>
   </section>
 
   <span class="garland mx-auto block max-w-sm mb-10"></span>
@@ -71,13 +71,6 @@
       <div id="person-filter" class="hidden flex gap-2 mb-5 flex-wrap"></div>
       <div id="photo-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 md:gap-4"></div>
       <div id="scroll-sentinel" class="h-4"></div>
-    </div>
-  </section>
-
-  <section class="max-w-5xl mx-auto mb-12">
-    <h2 class="font-display text-2xl mb-4" style="color:var(--charcoal)">Ceremony recap</h2>
-    <div class="aspect-video rounded-lg overflow-hidden bg-black">
-      <iframe class="w-full h-full" src="https://www.youtube-nocookie.com/embed/dkyEfliyAr4" title="Ceremony recap" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
     </div>
   </section>
 </main>
@@ -122,8 +115,8 @@
 
 <div id="pwa-toast" class="pwa-toast hidden">Install not supported on this browser. Try Chrome or Edge.</div>
 
-<script src="data.js"></script>
-<script src="shared.js"></script>
-<script src="gallery.js"></script>
+<script src="../js/data.js"></script>
+<script src="../js/shared.js"></script>
+<script src="../js/gallery.js"></script>
 </body>
 </html>

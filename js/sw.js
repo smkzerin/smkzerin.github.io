@@ -1,17 +1,17 @@
-const CACHE = "zerin-wedding-v1";
+const CACHE = "zerin-wedding-v2";
 const urlsToCache = [
   "/",
-  "holud",
-  "wedding",
-  "reception",
-  "downloads",
-  "style.css",
-  "shared.js",
-  "gallery.js",
-  "data.js",
-  "manifest.json",
-  "icons/icon-192.png",
-  "icons/icon-512.png"
+  "/pages/holud.html",
+  "/pages/wedding.html",
+  "/pages/reception.html",
+  "/pages/downloads.html",
+  "/css/style.css",
+  "/js/shared.js",
+  "/js/gallery.js",
+  "/js/data.js",
+  "/manifest.json",
+  "/icons/icon-192.png",
+  "/icons/icon-512.png"
 ];
 
 self.addEventListener("install", (event) => {

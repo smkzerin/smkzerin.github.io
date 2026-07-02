@@ -270,7 +270,7 @@ window.addEventListener("appinstalled", () => {
 });
 
 if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("sw.js");
+  navigator.serviceWorker.register("/js/sw.js");
 }
 
 document.addEventListener("DOMContentLoaded", () => {

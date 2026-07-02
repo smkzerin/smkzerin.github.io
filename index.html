@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="css/style.css">
 <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
 <link rel="icon" type="image/x-icon" href="icons/favicon.ico">
 <link rel="manifest" href="manifest.json">
@@ -19,18 +19,18 @@
 <header class="px-6 md:px-10 py-6 flex items-center justify-between">
   <a href="/" class="text-xs tracking-[0.2em] uppercase" style="color:var(--maroon)">Zerin &amp; Shoumik</a>
   <nav class="hidden md:flex gap-8 text-xs tracking-[0.1em] uppercase">
-    <a href="holud" class="hover:opacity-70">Holud</a>
-    <a href="wedding" class="hover:opacity-70">Wedding</a>
-    <a href="reception" class="hover:opacity-70">Reception</a>
-    <a href="downloads" class="hover:opacity-70">Downloads</a>
+    <a href="pages/holud" class="hover:opacity-70">Holud</a>
+    <a href="pages/wedding" class="hover:opacity-70">Wedding</a>
+    <a href="pages/reception" class="hover:opacity-70">Reception</a>
+    <a href="pages/downloads" class="hover:opacity-70">Downloads</a>
   </nav>
   <button id="menu-btn" class="md:hidden text-2xl leading-none" aria-label="Open menu">&#9776;</button>
 </header>
 <div id="mobile-nav" class="hidden md:hidden px-6 pb-4 flex flex-col gap-3 text-xs uppercase tracking-[0.1em]">
-  <a href="holud">Holud</a>
-  <a href="wedding">Wedding</a>
-  <a href="reception">Reception</a>
-  <a href="downloads">Downloads</a>
+  <a href="pages/holud">Holud</a>
+  <a href="pages/wedding">Wedding</a>
+  <a href="pages/reception">Reception</a>
+  <a href="pages/downloads">Downloads</a>
 </div>
 
 <main class="flex-1">
@@ -54,7 +54,7 @@
 
   <!-- Event cards -->
   <section class="px-6 md:px-10 pb-14 grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-    <a href="holud" class="group block rounded-xl overflow-hidden border" style="border-color:rgba(43,38,32,0.1)">
+    <a href="pages/holud" class="group block rounded-xl overflow-hidden border" style="border-color:rgba(43,38,32,0.1)">
       <div class="relative h-56 overflow-hidden">
         <img src="https://picsum.photos/seed/holud-cover/700/500" alt="Holud night cover" class="w-full h-full object-cover transition duration-500 group-hover:scale-105">
         <div class="absolute inset-0" style="background:linear-gradient(to top, rgba(43,38,32,0.55), transparent 55%)"></div>
@@ -66,7 +66,7 @@
       <p class="p-4 text-sm" style="color:var(--charcoal)">Turmeric, marigolds, and the dance floor. →</p>
     </a>
 
-    <a href="wedding" class="group block rounded-xl overflow-hidden border" style="border-color:rgba(43,38,32,0.1)">
+    <a href="pages/wedding" class="group block rounded-xl overflow-hidden border" style="border-color:rgba(43,38,32,0.1)">
       <div class="relative h-56 overflow-hidden">
         <img src="https://picsum.photos/seed/wedding-cover/700/500" alt="Wedding night cover" class="w-full h-full object-cover transition duration-500 group-hover:scale-105">
         <div class="absolute inset-0" style="background:linear-gradient(to top, rgba(43,38,32,0.55), transparent 55%)"></div>
@@ -78,7 +78,7 @@
       <p class="p-4 text-sm" style="color:var(--charcoal)">Vows, the ceremony, and everything in between. →</p>
     </a>
 
-    <a href="reception" class="group block rounded-xl overflow-hidden border" style="border-color:rgba(43,38,32,0.1)">
+    <a href="pages/reception" class="group block rounded-xl overflow-hidden border" style="border-color:rgba(43,38,32,0.1)">
       <div class="relative h-56 overflow-hidden">
         <img src="https://picsum.photos/seed/reception-cover/700/500" alt="Reception cover" class="w-full h-full object-cover transition duration-500 group-hover:scale-105">
         <div class="absolute inset-0" style="background:linear-gradient(to top, rgba(43,38,32,0.55), transparent 55%)"></div>
@@ -95,7 +95,7 @@
 
   <section class="px-6 md:px-10 pb-16 text-center">
     <p class="text-sm" style="color:var(--charcoal)">Want the full-resolution files?</p>
-    <a href="downloads" class="inline-block mt-4 px-7 py-3 rounded-full text-xs tracking-[0.15em] uppercase text-white" style="background:var(--maroon)">Go to downloads</a>
+    <a href="pages/downloads" class="inline-block mt-4 px-7 py-3 rounded-full text-xs tracking-[0.15em] uppercase text-white" style="background:var(--maroon)">Go to downloads</a>
   </section>
 </main>
 
@@ -117,7 +117,7 @@
 
 <div id="pwa-toast" class="pwa-toast hidden">Install not supported on this browser. Try Chrome or Edge.</div>
 
-<script src="data.js"></script>
-<script src="shared.js"></script>
+<script src="js/data.js"></script>
+<script src="js/shared.js"></script>
 </body>
 </html>
