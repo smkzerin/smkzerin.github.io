@@ -13,6 +13,8 @@ A wedding photo/video gallery for Zerin and Shoumik's three ceremonies: Holud (n
 - **Person filter tabs** on the Holud page to split photos by Zerin / Shoumik
 - **Download page** with per-file and per-folder links
 - **Responsive** layout with mobile hamburger menu
+- **Clean URLs** — `/holud`, `/wedding`, `/reception`, `/downloads` (no `.html` extension)
+
 ## 🛠️ Tech stack
 
 - HTML5, Vanilla JavaScript (ES6+), CSS3
