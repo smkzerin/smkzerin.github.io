@@ -1,5 +1,5 @@
 /**
- * generate-data.js
+ * generate-data.mjs
  * ─────────────────────────────────────────────────────────────────────────────
  * Fetches file listings from Google Drive and writes data.js.
  *
@@ -10,7 +10,7 @@
  *   Windows PowerShell:  $env:GOOGLE_API_KEY="AIza..."
  *   Mac/Linux:           export GOOGLE_API_KEY="AIza..."
  *
- * Then run:   node generate-data.js
+ * Then run:   node generate-data.mjs
  *
  * Requires Node 18+. No npm installs needed.
  */
@@ -31,7 +31,7 @@ Set it before running:
   Windows PowerShell:  $env:GOOGLE_API_KEY="AIza..."
   Mac/Linux:           export GOOGLE_API_KEY="AIza..."
 
-Then run: node generate-data.js
+Then run: node generate-data.mjs
 `);
   process.exit(1);
 }

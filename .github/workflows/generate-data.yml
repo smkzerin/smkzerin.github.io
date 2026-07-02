@@ -22,7 +22,7 @@ jobs:
       - name: Generate data.js
         env:
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
-        run: node scripts/generate-data.js
+        run: node scripts/generate-data.mjs
 
       - name: Commit and push data.js
         run: |

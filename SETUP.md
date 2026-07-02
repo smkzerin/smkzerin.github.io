@@ -25,9 +25,9 @@ The API key is stored in GitHub Secrets and never appears in any file in the rep
 
 The key is now encrypted in GitHub. It will never appear in logs, diffs, or files.
 
-### 3 — Add folder IDs to generate-data.js
+### 3 — Add folder IDs to generate-data.mjs
 
-As you upload each Drive folder, open `generate-data.js` and:
+As you upload each Drive folder, open `generate-data.mjs` and:
 - Replace the placeholder ID (e.g. `"HOLUD_PHOTOS_SHOUMIK_FOLDER_ID"`) with the real folder ID
   from its share URL: `https://drive.google.com/drive/folders/FOLDER_ID_HERE`
 - Change `skip: true` → `skip: false` for that folder
@@ -57,20 +57,20 @@ If you want to test without triggering the Action:
 ```powershell
 # Windows PowerShell
 $env:GOOGLE_API_KEY="AIza...your-key-here..."
-node generate-data.js
+node generate-data.mjs
 ```
 
 ```bash
 # Mac / Linux
 export GOOGLE_API_KEY="AIza...your-key-here..."
-node generate-data.js
+node generate-data.mjs
 ```
 
 ---
 
 ## Folder progress tracker
 
-| Folder | ID in generate-data.js | skip |
+| Folder | ID in generate-data.mjs | skip |
 |--------|------------------------|------|
 | Holud/Photos/Zerin     | ✅ real ID | false |
 | Holud/Photos/Shoumik   | ✅ real ID | false |

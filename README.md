@@ -43,7 +43,7 @@ A wedding photo/video gallery for Zerin and Shoumik's three ceremonies: Holud, W
 │   ├── gallery.js          # Gallery rendering, person filters, infinite scroll
 │   └── sw.js               # Service worker
 ├── scripts/
-│   └── generate-data.js    # Build-time script to generate data.js from Drive
+│   └── generate-data.mjs   # Build-time script to generate data.js from Drive (ESM)
 ├── tailwind.config.js      # Tailwind configuration
 ├── package.json
 └── .github/workflows/
@@ -99,17 +99,17 @@ Holud and Wedding/Reception live on separate Drive accounts. Follow this folder 
 `data.js` is generated from Google Drive by running:
 
 ```bash
-node scripts/generate-data.js
+node scripts/generate-data.mjs
 ```
 
 You need a Google API key with the Drive API enabled, stored as an environment variable:
 
 ```bash
 set GOOGLE_API_KEY=your_key_here
-node scripts/generate-data.js
+node scripts/generate-data.mjs
 ```
 
-The script reads the Drive folder IDs configured inside `generate-data.js`, walks the folder tree, and writes `js/data.js` with the complete media manifest.
+The script reads the Drive folder IDs configured inside `generate-data.mjs`, walks the folder tree, and writes `js/data.js` with the complete media manifest.
 
 ## 🎥 Video playback
 
@@ -125,7 +125,7 @@ npx serve --ssl localhost 3000
 
 ## 🤖 CI/CD
 
-A GitHub Actions workflow (`.github/workflows/generate-data.yml`) can be triggered manually via `workflow_dispatch`. It checks out the repo, runs `node scripts/generate-data.js` with the `GOOGLE_API_KEY` secret, and commits/pushes the updated `js/data.js` back to the repository.
+A GitHub Actions workflow (`.github/workflows/generate-data.yml`) can be triggered manually via `workflow_dispatch`. It checks out the repo, runs `node scripts/generate-data.mjs` with the `GOOGLE_API_KEY` secret, and commits/pushes the updated `js/data.js` back to the repository.
 
 ## ❤️ Credits
 
