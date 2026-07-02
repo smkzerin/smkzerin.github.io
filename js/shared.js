@@ -147,8 +147,10 @@ const heroCollage = {
 
   init() {
     if (!document.getElementById("hero-carousel")) return;
+    const category = document.body.dataset.category;
     this.covers = MEDIA.photos.filter(p => p.cover);
-    // Shuffle for variety across all events
+    if (category) this.covers = this.covers.filter(p => p.category === category);
+    // Shuffle for variety
     for (let i = this.covers.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [this.covers[i], this.covers[j]] = [this.covers[j], this.covers[i]];
