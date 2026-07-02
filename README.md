@@ -13,8 +13,6 @@ A wedding photo/video gallery for Zerin and Shoumik's three ceremonies: Holud (n
 - **Person filter tabs** on the Holud page to split photos by Zerin / Shoumik
 - **Download page** with per-file and per-folder links
 - **Responsive** layout with mobile hamburger menu
-- **Extensionless URLs** — clean paths like `/holud`, `/wedding`, `/reception`, `/downloads`
-
 ## 🛠️ Tech stack
 
 - HTML5, Vanilla JavaScript (ES6+), CSS3
@@ -24,26 +22,9 @@ A wedding photo/video gallery for Zerin and Shoumik's three ceremonies: Holud (n
 - GitHub Pages for hosting
 - GitHub Actions for scheduled data generation
 
-## 🔗 Extensionless routing
-
-All internal URLs use clean paths without `.html` extensions:
-
-| Path | Serves |
-|---|---|
-| `/` | Homepage |
-| `/holud` | Holud gallery |
-| `/wedding` | Wedding gallery |
-| `/reception` | Reception gallery |
-| `/downloads` | Download page |
-
-The `.html` versions (`/holud.html`, etc.) still work as a fallback.
-
-**How it works:** GitHub Pages serves `404.html` for any path that doesn't match a file. The `404.html` page loads `router.js`, which reads `window.location.pathname`, fetches the corresponding `.html` file, swaps the page content, and keeps the clean URL via `history.replaceState`. Internal link clicks are intercepted with `history.pushState` for smooth SPA-style navigation.
-
 ## 📁 File structure
 
 ```
-├── 404.html              # Fallback page for extensionless routing
 ├── index.html            # Homepage with hero carousel and event cards
 ├── holud.html            # Holud gallery with person filter tabs
 ├── wedding.html          # Wedding gallery
@@ -53,7 +34,6 @@ The `.html` versions (`/holud.html`, etc.) still work as a fallback.
 ├── data.js               # Media manifest (auto-generated)
 ├── shared.js             # Lightbox, video modal, carousel, Drive URL helpers
 ├── gallery.js            # Gallery rendering, person filters, infinite scroll
-├── router.js             # SPA router for extensionless URLs
 ├── generate-data.js      # Build-time script to generate data.js from Drive
 └── .github/workflows/
     └── generate-data.yml # GitHub Actions workflow
