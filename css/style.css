@@ -96,7 +96,10 @@ body {
   align-items: center;
   justify-content: center;
   box-shadow: 0 4px 12px rgba(43,38,32,0.25);
-  transition: opacity 0.3s, transform 0.2s;
+  transition: opacity 0.3s, transform 0.2s, box-shadow 0.2s;
+}
+.pwa-install-btn:hover {
+  box-shadow: 0 6px 20px rgba(43,38,32,0.35);
 }
 .pwa-install-btn:hover {
   transform: scale(1.08);
