@@ -247,4 +247,11 @@ document.addEventListener("DOMContentLoaded", () => {
   if (menuBtn && mobileNav) {
     menuBtn.addEventListener("click", () => mobileNav.classList.toggle("hidden"));
   }
+
+  document.querySelectorAll(".collapsible-trigger").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const section = btn.closest(".collapsible");
+      section.classList.toggle("collapsed");
+    });
+  });
 });
