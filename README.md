@@ -2,9 +2,9 @@
 
 A wedding photo/video gallery for Zerin and Shoumik's three ceremonies: Holud (night one), Wedding (night two), and Reception / Bou-Bhaat (night three).
 
-Built with plain HTML, vanilla JS, and Tailwind CSS (CDN, no build step). Hosted on GitHub Pages.
+💒 Built with plain HTML, vanilla JS, and Tailwind CSS (CDN, no build step). Hosted on GitHub Pages.
 
-## Features
+## ✨ Features
 
 - **Photo galleries** per event with lazy-loaded grid and infinite scroll
 - **Carousel** at the top of each page sourced from Covers subfolders
@@ -15,7 +15,7 @@ Built with plain HTML, vanilla JS, and Tailwind CSS (CDN, no build step). Hosted
 - **Responsive** layout with mobile hamburger menu
 - **Extensionless URLs** — clean paths like `/holud`, `/wedding`, `/reception`, `/downloads`
 
-## Tech stack
+## 🛠️ Tech stack
 
 - HTML5, Vanilla JavaScript (ES6+), CSS3
 - Tailwind CSS via CDN
@@ -24,7 +24,7 @@ Built with plain HTML, vanilla JS, and Tailwind CSS (CDN, no build step). Hosted
 - GitHub Pages for hosting
 - GitHub Actions for scheduled data generation
 
-## Extensionless routing
+## 🔗 Extensionless routing
 
 All internal URLs use clean paths without `.html` extensions:
 
@@ -40,7 +40,7 @@ The `.html` versions (`/holud.html`, etc.) still work as a fallback.
 
 **How it works:** GitHub Pages serves `404.html` for any path that doesn't match a file. The `404.html` page loads `router.js`, which reads `window.location.pathname`, fetches the corresponding `.html` file, swaps the page content, and keeps the clean URL via `history.replaceState`. Internal link clicks are intercepted with `history.pushState` for smooth SPA-style navigation.
 
-## File structure
+## 📁 File structure
 
 ```
 ├── 404.html              # Fallback page for extensionless routing
@@ -59,7 +59,7 @@ The `.html` versions (`/holud.html`, etc.) still work as a fallback.
     └── generate-data.yml # GitHub Actions workflow
 ```
 
-## Google Drive setup
+## ☁️ Google Drive setup
 
 Holud and Wedding/Reception live on separate Drive accounts. Follow this folder structure exactly — the fetch script uses subfolder names to set `category`, `type`, and `person` automatically.
 
@@ -85,13 +85,13 @@ Holud and Wedding/Reception live on separate Drive accounts. Follow this folder 
 ```
 
 **Key rules:**
-- Filenames can stay as-is from your camera (`IMG_xxxx.jpg`, etc.)
-- Everything inside `Photos/Zerin/` gets tagged `person: "zerin"`
-- Everything inside `Photos/Shoumik/` gets tagged `person: "shoumik"`
-- Photos in a `Covers/` subfolder get tagged `cover: true`
-- Set sharing on every top-level folder to **"Anyone with the link — Viewer"**
+- 📸 Filenames can stay as-is from your camera (`IMG_xxxx.jpg`, etc.)
+- 👰 Everything inside `Photos/Zerin/` gets tagged `person: "zerin"`
+- 🤵 Everything inside `Photos/Shoumik/` gets tagged `person: "shoumik"`
+- ⭐ Photos in a `Covers/` subfolder get tagged `cover: true`
+- 🔗 Set sharing on every top-level folder to **"Anyone with the link — Viewer"**
 
-## Data generation
+## ⚙️ Data generation
 
 `data.js` is generated from Google Drive by running:
 
@@ -108,10 +108,10 @@ node generate-data.js
 
 The script reads the Drive folder IDs configured inside `generate-data.js`, walks the folder tree, and writes `data.js` with the complete media manifest.
 
-## CI/CD
+## 🤖 CI/CD
 
 A GitHub Actions workflow (`.github/workflows/generate-data.yml`) can be triggered manually via `workflow_dispatch`. It checks out the repo, runs `node generate-data.js` with the `GOOGLE_API_KEY` secret, and commits/pushes the updated `data.js` back to the repository.
 
-## Credits
+## ❤️ Credits
 
 Site built for Zerin and Shoumik by [Pranto](https://pranto-smss.github.io/).
