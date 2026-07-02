@@ -234,17 +234,20 @@ const heroCollage = {
   }
 };
 
-document.addEventListener("DOMContentLoaded", () => {
+function initShared() {
   lightbox.init();
   videoModal.init();
   heroCollage.init();
-
   const yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
-
   const menuBtn = document.getElementById("menu-btn");
   const mobileNav = document.getElementById("mobile-nav");
   if (menuBtn && mobileNav) {
     menuBtn.addEventListener("click", () => mobileNav.classList.toggle("hidden"));
   }
-});
+}
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initShared);
+} else {
+  initShared();
+}

@@ -3,14 +3,18 @@
 const BATCH_SIZE = 12;
 let scrollObserver = null;
 
-document.addEventListener("DOMContentLoaded", () => {
+function initGallery() {
   const category = document.body.dataset.category;
   const photos = MEDIA.photos.filter(p => p.category === category);
   const videos = MEDIA.videos.filter(v => v.category === category);
-
   renderVideos(videos);
   renderPersonFilter(photos);
-});
+}
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initGallery);
+} else {
+  initGallery();
+}
 
 function renderPersonFilter(photos) {
   const wrap = document.getElementById("person-filter");
