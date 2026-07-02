@@ -76,7 +76,7 @@ node generate-data.js
 | Holud/Photos/Shoumik   | ✅ real ID | false |
 | Holud/Videos           | ⏳ placeholder | true |
 | Holud/Covers           | ⏳ placeholder | true |
-| Wedding/Photos         | ⏳ placeholder | true |
+| Wedding/Photos         | ✅ real ID | false |
 | Wedding/Videos         | ⏳ placeholder | true |
 | Wedding/Covers         | ⏳ placeholder | true |
 | Reception/Photos       | ⏳ placeholder | true |

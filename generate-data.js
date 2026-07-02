@@ -72,10 +72,10 @@ const FOLDERS = [
 
   // ── WEDDING ───────────────────────────────────────────────────────────────
   {
-    id:       "WEDDING_PHOTOS_FOLDER_ID",
+    id:       "1-ML4PDxsMAJiNkDMRfkbcM041Xk9CZDy",
     category: "wedding",
     type:     "photo",
-    skip:     true,
+    skip:     false,
   },
   {
     id:       "WEDDING_VIDEOS_FOLDER_ID",
