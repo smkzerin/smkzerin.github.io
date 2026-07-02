@@ -4,7 +4,7 @@ const isDemo = (id) => id.startsWith("DEMO-");
 
 function driveThumbUrl(id, width = 480) {
   if (isDemo(id)) return `https://picsum.photos/seed/${encodeURIComponent(id)}/${width}/${Math.round(width * 1.25)}`;
-  return `https://drive.google.com/thumbnail?id=${id}&sz=w${width}`;
+  return `https://lh3.googleusercontent.com/d/${id}`;
 }
 
 function driveFullImageUrl(id) {
@@ -116,8 +116,13 @@ const videoModal = {
   },
 
   open(item) {
-    const src = driveVideoDirectUrl(item.id);
-    this.frameWrap.innerHTML = `<video src="${src}" controls autoplay class="w-full h-full"></video>`;
+    const isDemo = item.id.startsWith("DEMO-");
+    if (isDemo) {
+      const src = driveVideoDirectUrl(item.id);
+      this.frameWrap.innerHTML = `<video src="${src}" controls autoplay class="w-full h-full"></video>`;
+    } else {
+      this.frameWrap.innerHTML = `<iframe src="${driveVideoEmbedUrl(item.id)}" class="w-full h-full" allow="autoplay" allowfullscreen></iframe>`;
+    }
     document.getElementById("video-modal-caption").textContent = item.name;
     if (this.downloadEl) {
       this.downloadEl.href = driveDownloadUrl(item.id);
