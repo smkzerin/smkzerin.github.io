@@ -1,21 +1,76 @@
 # Zerin & Shoumik — Wedding Showcase
 
-A wedding photo/video gallery built with plain HTML, vanilla JS, and Tailwind (via CDN, no build step).
+A wedding photo/video gallery for Zerin and Shoumik's three ceremonies: Holud (night one), Wedding (night two), and Reception / Bou-Bhaat (night three).
 
-Three events are covered: Holud (night one), Wedding (night two), and Reception / Bou-Bhaat (night three, the day after the wedding).
+Built with plain HTML, vanilla JS, and Tailwind CSS (CDN, no build step). Hosted on GitHub Pages.
 
-## Drive folder structure
+## Features
 
-Holud and Wedding/Reception live on separate Drive accounts. Follow this structure exactly — the fetch script uses subfolder names to set `category`, `type`, and `person` automatically, so no manual renaming of individual files is needed.
+- **Photo galleries** per event with lazy-loaded grid and infinite scroll
+- **Carousel** at the top of each page sourced from Covers subfolders
+- **Lightbox** for full-resolution photo viewing with keyboard/touch navigation
+- **Video modal** with inline playback and download links
+- **Person filter tabs** on the Holud page to split photos by Zerin / Shoumik
+- **Download page** with per-file and per-folder links
+- **Responsive** layout with mobile hamburger menu
+- **Extensionless URLs** — clean paths like `/holud`, `/wedding`, `/reception`, `/downloads`
+
+## Tech stack
+
+- HTML5, Vanilla JavaScript (ES6+), CSS3
+- Tailwind CSS via CDN
+- Google Fonts (Cormorant Garamond + Jost)
+- Google Drive as media storage
+- GitHub Pages for hosting
+- GitHub Actions for scheduled data generation
+
+## Extensionless routing
+
+All internal URLs use clean paths without `.html` extensions:
+
+| Path | Serves |
+|---|---|
+| `/` | Homepage |
+| `/holud` | Holud gallery |
+| `/wedding` | Wedding gallery |
+| `/reception` | Reception gallery |
+| `/downloads` | Download page |
+
+The `.html` versions (`/holud.html`, etc.) still work as a fallback.
+
+**How it works:** GitHub Pages serves `404.html` for any path that doesn't match a file. The `404.html` page loads `router.js`, which reads `window.location.pathname`, fetches the corresponding `.html` file, swaps the page content, and keeps the clean URL via `history.replaceState`. Internal link clicks are intercepted with `history.pushState` for smooth SPA-style navigation.
+
+## File structure
+
+```
+├── 404.html              # Fallback page for extensionless routing
+├── index.html            # Homepage with hero carousel and event cards
+├── holud.html            # Holud gallery with person filter tabs
+├── wedding.html          # Wedding gallery
+├── reception.html        # Reception gallery
+├── downloads.html        # Per-file and folder download page
+├── style.css             # Custom styles (Tailwind via CDN)
+├── data.js               # Media manifest (auto-generated)
+├── shared.js             # Lightbox, video modal, carousel, Drive URL helpers
+├── gallery.js            # Gallery rendering, person filters, infinite scroll
+├── router.js             # SPA router for extensionless URLs
+├── generate-data.js      # Build-time script to generate data.js from Drive
+└── .github/workflows/
+    └── generate-data.yml # GitHub Actions workflow
+```
+
+## Google Drive setup
+
+Holud and Wedding/Reception live on separate Drive accounts. Follow this folder structure exactly — the fetch script uses subfolder names to set `category`, `type`, and `person` automatically.
 
 ```
 [Holud Drive account]
 └── Holud Night/
     ├── Photos/
-    │   ├── Zerin/       ← bride's photos (person: "zerin")
-    │   └── Shoumik/     ← groom's photos (person: "shoumik")
+    │   ├── Zerin/       ← person: "zerin"
+    │   └── Shoumik/     ← person: "shoumik"
     ├── Videos/
-    └── Covers/          ← 4–12 favourite shots for the page's carousel
+    └── Covers/          ← 4–12 favourite shots for the carousel
 
 [Wedding + Reception Drive account]
 └── Wedding Night/
@@ -30,23 +85,33 @@ Holud and Wedding/Reception live on separate Drive accounts. Follow this structu
 ```
 
 **Key rules:**
-- Filenames can stay exactly as-is from your camera (IMG_xxxx.jpg, etc.)
-- Everything inside `Photos/Zerin/` gets `person: "zerin"` automatically
-- Everything inside `Photos/Shoumik/` gets `person: "shoumik"` automatically
-- Photos in a `Covers/` subfolder get `cover: true` (used by the per-page carousel)
+- Filenames can stay as-is from your camera (`IMG_xxxx.jpg`, etc.)
+- Everything inside `Photos/Zerin/` gets tagged `person: "zerin"`
+- Everything inside `Photos/Shoumik/` gets tagged `person: "shoumik"`
+- Photos in a `Covers/` subfolder get tagged `cover: true`
 - Set sharing on every top-level folder to **"Anyone with the link — Viewer"**
 
-## On the website
-- **Holud page** — shows a "All / Zerin / Shoumik" tab filter above the photo grid
-- **Wedding & Reception pages** — no filter tabs (photos are not person-split there)
-- Every page shows a carousel at the top sourced from that event's own Covers folder
+## Data generation
 
-## Structure
-- `index.html` — homepage with photo carousel and event cards
-- `holud.html` — Holud gallery with Zerin/Shoumik person filter tabs
-- `wedding.html`, `reception.html` — galleries (carousel + video row + lazy photo grid)
-- `downloads.html` — per-file download list + whole-folder shortcuts for all three events
-- `js/data.js` — media manifest (generated by the fetch script)
-- `js/shared.js` — Drive URL builders, lightbox, video modal, carousel
-- `js/gallery.js` — gallery rendering, person-filter tabs, infinite scroll
-- `css/style.css` — fonts, color tokens, garland divider, carousel layout
+`data.js` is generated from Google Drive by running:
+
+```bash
+node generate-data.js
+```
+
+You need a Google API key with the Drive API enabled, stored as an environment variable:
+
+```bash
+set GOOGLE_API_KEY=your_key_here
+node generate-data.js
+```
+
+The script reads the Drive folder IDs configured inside `generate-data.js`, walks the folder tree, and writes `data.js` with the complete media manifest.
+
+## CI/CD
+
+A GitHub Actions workflow (`.github/workflows/generate-data.yml`) can be triggered manually via `workflow_dispatch`. It checks out the repo, runs `node generate-data.js` with the `GOOGLE_API_KEY` secret, and commits/pushes the updated `data.js` back to the repository.
+
+## Credits
+
+Site built for Zerin and Shoumik by [Pranto](https://pranto-smss.github.io/).
