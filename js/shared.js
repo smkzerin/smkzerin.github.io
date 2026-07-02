@@ -7,6 +7,11 @@ function driveThumbUrl(id, width = 480) {
   return `https://lh3.googleusercontent.com/d/${id}`;
 }
 
+function driveVideoThumbUrl(id, width = 320) {
+  if (isDemo(id)) return `https://picsum.photos/seed/${encodeURIComponent(id)}/${width}/${Math.round(width * 1.25)}`;
+  return `https://drive.google.com/thumbnail?id=${id}&sz=w${width}`;
+}
+
 function driveFullImageUrl(id) {
   if (isDemo(id)) return `https://picsum.photos/seed/${encodeURIComponent(id)}/1400/1750`;
   // lh3.googleusercontent.com/d/ID serves the original full-resolution file
