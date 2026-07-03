@@ -132,6 +132,7 @@ const videoModal = {
     const iframe = this.frameWrap.querySelector("iframe");
     if (!iframe) return;
     const wrapWidth = this.frameWrap.clientWidth;
+    if (!wrapWidth) return; // not laid out yet — don't scale to 0
     const scale = wrapWidth / 640;
     iframe.style.transform = `scale(${scale})`;
   },
@@ -139,23 +140,30 @@ const videoModal = {
   open(item) {
     const isDemo = item.id.startsWith("DEMO-");
     this.isIframe = !isDemo;
-    if (isDemo) {
-      const src = driveVideoDirectUrl(item.id);
-      this.frameWrap.innerHTML = `<video src="${src}" controls autoplay playsinline></video>`;
-    } else {
-      this.frameWrap.innerHTML = `<iframe src="${driveVideoEmbedUrl(item.id)}" allow="autoplay" allowfullscreen scrolling="no"></iframe>`;
-      this.scaleIframe();
-      this._resizeHandler = () => this.scaleIframe();
-      window.addEventListener("resize", this._resizeHandler);
-      window.addEventListener("orientationchange", this._resizeHandler);
-    }
     document.getElementById("video-modal-caption").textContent = item.name;
     if (this.downloadEl) {
       this.downloadEl.href = driveDownloadUrl(item.id);
       this.downloadEl.download = item.name;
     }
+    // Unhide first — frameWrap must be visible (non-zero clientWidth)
+    // before we measure it for the iframe scale, otherwise scale
+    // computes to 0 and the video area is just the wrapper's black
+    // background (blank/black screen).
     this.el.classList.remove("hidden");
     document.body.classList.add("overflow-hidden");
+
+    if (isDemo) {
+      const src = driveVideoDirectUrl(item.id);
+      this.frameWrap.innerHTML = `<video src="${src}" controls autoplay playsinline></video>`;
+    } else {
+      this.frameWrap.innerHTML = `<iframe src="${driveVideoEmbedUrl(item.id)}" allow="autoplay" allowfullscreen scrolling="no"></iframe>`;
+      // requestAnimationFrame ensures layout has settled after unhiding
+      // before we read clientWidth.
+      requestAnimationFrame(() => this.scaleIframe());
+      this._resizeHandler = () => this.scaleIframe();
+      window.addEventListener("resize", this._resizeHandler);
+      window.addEventListener("orientationchange", this._resizeHandler);
+    }
   },
 
   close() {
