@@ -159,3 +159,27 @@ body {
 .collapsible:not(.collapsed) .collapsible-icon {
   transform: rotate(45deg);
 }
+
+/* Video modal frame — padding-top trick instead of aspect-ratio.
+   Mobile browsers can resolve aspect-ratio against a stale/zero parent
+   height right when the modal opens, which made Drive's preview iframe
+   lock its internal player to the wrong scale (video cut in half,
+   controls pushed off-screen). This gives an unambiguous pixel height
+   immediately on insert. */
+.video-frame-16x9 {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%; /* 16:9 */
+  max-height: 85vh;
+  background: #000;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+.video-frame-16x9 iframe,
+.video-frame-16x9 video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}

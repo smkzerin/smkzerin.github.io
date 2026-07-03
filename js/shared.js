@@ -125,9 +125,9 @@ const videoModal = {
     const isDemo = item.id.startsWith("DEMO-");
     if (isDemo) {
       const src = driveVideoDirectUrl(item.id);
-      this.frameWrap.innerHTML = `<video src="${src}" controls autoplay class="w-full h-full"></video>`;
+      this.frameWrap.innerHTML = `<video src="${src}" controls autoplay playsinline></video>`;
     } else {
-      this.frameWrap.innerHTML = `<iframe src="${driveVideoEmbedUrl(item.id)}" class="w-full h-full" allow="autoplay" allowfullscreen></iframe>`;
+      this.frameWrap.innerHTML = `<iframe src="${driveVideoEmbedUrl(item.id)}" allow="autoplay" allowfullscreen scrolling="no"></iframe>`;
     }
     document.getElementById("video-modal-caption").textContent = item.name;
     if (this.downloadEl) {
