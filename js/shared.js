@@ -108,6 +108,8 @@ const videoModal = {
   el: null,
   frameWrap: null,
   downloadEl: null,
+  isIframe: false,
+  _resizeHandler: null,
 
   init() {
     this.el = document.getElementById("video-modal");
@@ -121,13 +123,31 @@ const videoModal = {
     });
   },
 
+  // Drive's /preview player is a fixed 640x360-ish native player, not
+  // truly responsive. We keep the iframe at that native size and scale
+  // it down uniformly with a CSS transform so video + controls shrink
+  // together, instead of letting width/height:100% stretch them
+  // non-uniformly (which cropped the video and bloated the controls).
+  scaleIframe() {
+    const iframe = this.frameWrap.querySelector("iframe");
+    if (!iframe) return;
+    const wrapWidth = this.frameWrap.clientWidth;
+    const scale = wrapWidth / 640;
+    iframe.style.transform = `scale(${scale})`;
+  },
+
   open(item) {
     const isDemo = item.id.startsWith("DEMO-");
+    this.isIframe = !isDemo;
     if (isDemo) {
       const src = driveVideoDirectUrl(item.id);
       this.frameWrap.innerHTML = `<video src="${src}" controls autoplay playsinline></video>`;
     } else {
       this.frameWrap.innerHTML = `<iframe src="${driveVideoEmbedUrl(item.id)}" allow="autoplay" allowfullscreen scrolling="no"></iframe>`;
+      this.scaleIframe();
+      this._resizeHandler = () => this.scaleIframe();
+      window.addEventListener("resize", this._resizeHandler);
+      window.addEventListener("orientationchange", this._resizeHandler);
     }
     document.getElementById("video-modal-caption").textContent = item.name;
     if (this.downloadEl) {
@@ -140,6 +160,11 @@ const videoModal = {
 
   close() {
     this.frameWrap.innerHTML = "";
+    if (this._resizeHandler) {
+      window.removeEventListener("resize", this._resizeHandler);
+      window.removeEventListener("orientationchange", this._resizeHandler);
+      this._resizeHandler = null;
+    }
     if (this.downloadEl) this.downloadEl.href = "#";
     this.el.classList.add("hidden");
     document.body.classList.remove("overflow-hidden");

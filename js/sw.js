@@ -1,4 +1,4 @@
-const CACHE = "zerin-wedding-v3";
+const CACHE = "zerin-wedding-v4";
 const urlsToCache = [
   "/",
   "/pages/holud.html",

@@ -175,11 +175,25 @@ body {
   border-radius: 0.5rem;
   overflow: hidden;
 }
-.video-frame-16x9 iframe,
 .video-frame-16x9 video {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   border: 0;
+}
+/* Google Drive's /preview player is NOT truly responsive — it's a fixed
+   native-size player. Stretching it with width/height:100% scales the
+   video and its control bar non-uniformly (video gets cropped, controls
+   get oversized/misaligned). Instead we render it at native size and
+   scale the whole thing down uniformly, so video + controls shrink
+   together in proportion. JS sets the transform based on wrapper width. */
+.video-frame-16x9 iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 640px;
+  height: 360px;
+  border: 0;
+  transform-origin: 0 0;
 }
