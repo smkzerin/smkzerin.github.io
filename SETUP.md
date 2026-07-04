@@ -44,7 +44,8 @@ As you upload each Drive folder, open `generate-data.mjs` and:
 
 The Action will:
 - Fetch all real Drive folders (those with `skip: false`)
-- Use placeholder data for any folder still marked `skip: true`
+- Use placeholder data for any photo folder still marked `skip: true`
+- Omit videos entirely for video folders still marked `skip: true` (no video section shown)
 - Commit the generated `data.js` directly back into your repo
 - The site on GitHub Pages will update automatically within ~30 seconds
 
@@ -70,17 +71,17 @@ node generate-data.mjs
 
 ## Folder progress tracker
 
-| Folder | ID in generate-data.mjs | skip |
-|--------|------------------------|------|
-| Holud/Photos/Zerin     | ✅ real ID | false |
-| Holud/Photos/Shoumik   | ✅ real ID | false |
-| Holud/Videos           | ✅ real ID | true |
-| Holud/Covers           | ✅ real ID | true |
-| Wedding/Photos         | ✅ real ID | false |
-| Wedding/Videos         | ✅ real ID | true |
-| Wedding/Covers         | ✅ real ID | true |
-| Reception/Photos       | ✅ real ID | false |
-| Reception/Videos       | ✅ real ID | false |
-| Reception/Covers       | ✅ real ID | false |
+| Folder | ID in generate-data.mjs | skip | Video section |
+|--------|------------------------|------|---------------|
+| Holud/Photos/Zerin     | ✅ real ID | false | — |
+| Holud/Photos/Shoumik   | ✅ real ID | false | — |
+| Holud/Videos           | ✅ real ID | true  | hidden (no real videos yet) |
+| Holud/Covers           | ✅ real ID | false | — |
+| Wedding/Photos         | ✅ real ID | false | — |
+| Wedding/Videos         | ✅ real ID | true  | hidden (no real videos yet) |
+| Wedding/Covers         | ✅ real ID | false | — |
+| Reception/Photos       | ✅ real ID | false | — |
+| Reception/Videos       | ✅ real ID | false | shown (2 real videos) |
+| Reception/Covers       | ✅ real ID | false | — |
 
 Update this table as you go.

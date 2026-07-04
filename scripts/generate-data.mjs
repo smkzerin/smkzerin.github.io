@@ -198,8 +198,12 @@ for (const folder of FOLDERS) {
     .filter(Boolean).join("/");
 
   if (folder.skip) {
+    if (folder.type === "video") {
+      console.log(`—  ${label}: skipped — no placeholder videos generated`);
+      continue;
+    }
     const placeholders = makePlaceholders(folder);
-    (folder.type === "video" ? videos : photos).push(...placeholders);
+    photos.push(...placeholders);
     placeholderCount += placeholders.length;
     console.log(`⚠  ${label}: skipped — ${placeholders.length} placeholders`);
     continue;

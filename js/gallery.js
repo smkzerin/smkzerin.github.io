@@ -56,11 +56,9 @@ function renderPersonFilter(photos) {
 function renderVideos(videos) {
   const wrap = document.getElementById("video-row");
   if (!wrap) return;
-  if (videos.length === 0) {
-    wrap.parentElement.classList.add("hidden");
-    return;
-  }
-  wrap.innerHTML = videos.map((v, i) => `
+  const real = videos.filter(v => !v.id.startsWith("DEMO-"));
+  if (real.length === 0) return;
+  wrap.innerHTML = real.map((v, i) => `
     <div class="relative flex-shrink-0 w-56">
       <button class="group relative w-full rounded-lg overflow-hidden border" style="border-color:rgba(43,38,32,0.12)" data-video-index="${i}">
         <img src="${driveVideoThumbUrl(v.id, v.thumbId, 320)}" alt="${v.name}" loading="lazy" class="w-full h-36 object-cover transition duration-300 group-hover:scale-105">
@@ -76,7 +74,7 @@ function renderVideos(videos) {
   wrap.querySelectorAll("[data-video-index]").forEach(btn => {
     btn.addEventListener("click", () => {
       const i = Number(btn.dataset.videoIndex);
-      videoModal.open(videos[i]);
+      videoModal.open(real[i]);
     });
   });
 }
