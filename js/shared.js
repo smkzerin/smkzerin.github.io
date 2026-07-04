@@ -212,6 +212,19 @@ const heroCollage = {
       if (document.hidden) this.stopAutoplay();
       else this.startAutoplay();
     });
+
+    if (typeof IntersectionObserver !== "undefined") {
+      const section = document.querySelector("[data-collage-section]");
+      if (section) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) this.startAutoplay();
+            else this.stopAutoplay();
+          });
+        }, { threshold: 0 });
+        observer.observe(section);
+      }
+    }
   },
 
   startAutoplay() {
@@ -258,7 +271,10 @@ const heroCollage = {
     });
 
     const active = thumbs.querySelector(`[data-index="${this.index}"]`);
-    if (active) active.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+    if (active) {
+      const center = active.offsetLeft + active.offsetWidth / 2 - thumbs.offsetWidth / 2;
+      thumbs.scrollTo({ left: center, behavior: "smooth" });
+    }
   },
 
   bindEvents() {
