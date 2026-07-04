@@ -127,6 +127,6 @@ npx serve --ssl localhost 3000
 
 A GitHub Actions workflow (`.github/workflows/generate-data.yml`) can be triggered manually via `workflow_dispatch`. It checks out the repo, runs `node scripts/generate-data.mjs` with the `GOOGLE_API_KEY` secret, and commits/pushes the updated `js/data.js` back to the repository.
 
-## ©️ Credits
+## ❤️ Credits
 
 Site built for Zerin and Shoumik by [Pranto](https://pranto-smss.github.io/).

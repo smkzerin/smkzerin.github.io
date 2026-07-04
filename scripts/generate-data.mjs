@@ -68,11 +68,11 @@ const FOLDERS = [
     skip:     true,
   },
   {
-    id:       "1_PMCD3MrfLoU4m6JyRtGNBcVBt7Kgl9O",
+    id:       "1x6_FPSE4q0gVJK0V61SHtLaUXsQrD8jL",
     category: "holud",
     type:     "photo",
     cover:    true,
-    skip:     true,
+    skip:     false,
   },
 
   // ── WEDDING ───────────────────────────────────────────────────────────────
@@ -93,7 +93,7 @@ const FOLDERS = [
     category: "wedding",
     type:     "photo",
     cover:    true,
-    skip:     true,
+    skip:     false,
   },
 
   // ── RECEPTION ─────────────────────────────────────────────────────────────
