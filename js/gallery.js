@@ -85,6 +85,7 @@ function renderPhotoBatches(photos) {
   const grid = document.getElementById("photo-grid");
   const sentinel = document.getElementById("scroll-sentinel");
   const countEl = document.getElementById("photo-count");
+  const showAllBtn = document.getElementById("show-all-btn");
   if (!grid) return;
 
   grid.innerHTML = "";
@@ -125,12 +126,67 @@ function renderPhotoBatches(photos) {
     }
   }
 
-  if (sentinel) {
-    scrollObserver = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting) renderNextBatch();
-    }, { rootMargin: "200px" });
-    scrollObserver.observe(sentinel);
+  function makePhotoElement(p, index) {
+    const wrap = document.createElement("div");
+    wrap.className = "fade-in group relative";
+    const btn = document.createElement("button");
+    btn.className = "block w-full rounded-lg overflow-hidden border";
+    btn.style.borderColor = "rgba(43,38,32,0.12)";
+    btn.setAttribute("aria-label", `Open photo: ${p.name}`);
+    btn.innerHTML = `<img src="${driveThumbUrl(p.id, 420)}" alt="${p.name}" loading="lazy" class="card-photo w-full">`;
+    btn.addEventListener("click", () => lightbox.open(photos, index));
+    const dl = document.createElement("a");
+    dl.href = driveDownloadUrl(p.id);
+    dl.download = p.name;
+    dl.className = "absolute bottom-2 right-2 w-8 h-8 rounded-full flex items-center justify-center text-sm opacity-0 group-hover:opacity-100 transition-opacity";
+    dl.style.cssText = "background:rgba(43,38,32,0.65);color:#FBF6EC";
+    dl.title = `Download ${p.name}`;
+    dl.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>';
+    wrap.appendChild(btn);
+    wrap.appendChild(dl);
+    return wrap;
   }
 
-  renderNextBatch();
+  // Calculate 2-row count from Tailwind's responsive grid classes
+  const vw = window.innerWidth;
+  let colCount = 2;
+  if (vw >= 768 && grid.classList.contains("md:grid-cols-4")) colCount = 4;
+  else if (vw >= 640 && grid.classList.contains("sm:grid-cols-3")) colCount = 3;
+  const TWO_ROWS = colCount * 2;
+
+  if (photos.length > TWO_ROWS) {
+    // Show only 2 rows initially
+    const initialBatch = photos.slice(0, TWO_ROWS);
+    initialBatch.forEach((p, i) => {
+      grid.appendChild(makePhotoElement(p, photos.indexOf(p)));
+    });
+    shown = TWO_ROWS;
+
+    if (sentinel) sentinel.style.display = "none";
+    if (showAllBtn) {
+      showAllBtn.classList.remove("hidden");
+      const newBtn = showAllBtn.cloneNode(true);
+      showAllBtn.parentNode.replaceChild(newBtn, showAllBtn);
+      newBtn.addEventListener("click", function onClick() {
+        newBtn.classList.add("hidden");
+        if (sentinel) {
+          sentinel.style.display = "";
+          scrollObserver = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) renderNextBatch();
+          }, { rootMargin: "200px" });
+          scrollObserver.observe(sentinel);
+        }
+        renderNextBatch();
+      });
+    }
+  } else {
+    if (showAllBtn) showAllBtn.classList.add("hidden");
+    if (sentinel) {
+      scrollObserver = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) renderNextBatch();
+      }, { rootMargin: "200px" });
+      scrollObserver.observe(sentinel);
+    }
+    renderNextBatch();
+  }
 }

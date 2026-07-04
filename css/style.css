@@ -135,31 +135,6 @@ body {
   color: var(--charcoal);
 }
 
-.collapsible-trigger {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  cursor: pointer;
-  padding: 0 0 0 0;
-  background: none;
-  border: none;
-  color: inherit;
-  text-align: left;
-  font: inherit;
-}
-.collapsible.collapsed .collapsible-content {
-  display: none;
-}
-.collapsible-icon {
-  font-size: 1.5rem;
-  line-height: 1;
-  transition: transform 0.2s;
-}
-.collapsible:not(.collapsed) .collapsible-icon {
-  transform: rotate(45deg);
-}
-
 /* Video modal frame — padding-top trick instead of aspect-ratio.
    Mobile browsers can resolve aspect-ratio against a stale/zero parent
    height right when the modal opens, which made Drive's preview iframe
