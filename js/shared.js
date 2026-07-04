@@ -184,7 +184,7 @@ const heroCollage = {
   covers: [],
   index: 0,
   autoplayTimer: null,
-  autoplayDelay: 6000, // ms — advance the carousel once per second
+  autoplayDelay: 6000, // ms — advance the carousel once per six seconds
 
   init() {
     if (!document.getElementById("hero-carousel")) return;
@@ -319,6 +319,18 @@ const heroCollage = {
   }
 };
 
+/* HOME PAGE EVENT CARDS — pick one random cover photo per category.
+   Picked once on page load and left alone until the page is reloaded. */
+function renderHomeCovers() {
+  document.querySelectorAll("[data-cover-category]").forEach((img) => {
+    const category = img.dataset.coverCategory;
+    const covers = MEDIA.photos.filter(p => p.cover && p.category === category);
+    if (covers.length === 0) return;
+    const pick = covers[Math.floor(Math.random() * covers.length)];
+    img.src = driveThumbUrl(pick.id, 700);
+  });
+}
+
 /* PWA - service worker registration + install button */
 let pwaInstallPrompt = null;
 
@@ -362,6 +374,7 @@ document.addEventListener("DOMContentLoaded", () => {
   lightbox.init();
   videoModal.init();
   heroCollage.init();
+  renderHomeCovers();
 
   const yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
