@@ -183,6 +183,8 @@ const videoModal = {
 const heroCollage = {
   covers: [],
   index: 0,
+  autoplayTimer: null,
+  autoplayDelay: 6000, // ms — advance the carousel once per second
 
   init() {
     if (!document.getElementById("hero-carousel")) return;
@@ -202,6 +204,36 @@ const heroCollage = {
 
     this.render();
     this.bindEvents();
+    this.startAutoplay();
+
+    // Pause while the tab/page isn't visible so we don't burn through
+    // slides while the user is away, and resume when they come back.
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) this.stopAutoplay();
+      else this.startAutoplay();
+    });
+  },
+
+  startAutoplay() {
+    if (this.covers.length < 2) return;
+    this.stopAutoplay();
+    this.autoplayTimer = setInterval(() => {
+      this.index = (this.index + 1) % this.covers.length;
+      this.render();
+    }, this.autoplayDelay);
+  },
+
+  stopAutoplay() {
+    if (this.autoplayTimer) {
+      clearInterval(this.autoplayTimer);
+      this.autoplayTimer = null;
+    }
+  },
+
+  // Call after any manual navigation so the next auto-advance is a full
+  // interval away, instead of firing right on top of the user's action.
+  restartAutoplay() {
+    this.startAutoplay();
   },
 
   render() {
@@ -221,6 +253,7 @@ const heroCollage = {
       btn.addEventListener("click", () => {
         this.index = Number(btn.dataset.index);
         this.render();
+        this.restartAutoplay();
       });
     });
 
@@ -232,10 +265,12 @@ const heroCollage = {
     document.getElementById("carousel-prev")?.addEventListener("click", () => {
       this.index = (this.index - 1 + this.covers.length) % this.covers.length;
       this.render();
+      this.restartAutoplay();
     });
     document.getElementById("carousel-next")?.addEventListener("click", () => {
       this.index = (this.index + 1) % this.covers.length;
       this.render();
+      this.restartAutoplay();
     });
 
     const main = document.getElementById("carousel-main");
@@ -255,6 +290,7 @@ const heroCollage = {
             this.index = (this.index - 1 + this.covers.length) % this.covers.length;
           }
           this.render();
+          this.restartAutoplay();
         }
       }, { passive: true });
     }
