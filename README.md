@@ -129,4 +129,4 @@ A GitHub Actions workflow (`.github/workflows/generate-data.yml`) can be trigger
 
 ## ❤️ Credits
 
-Site built for Zerin and Shoumik by [Pranto](https://pranto-smss.github.io/).
+Site built for Zerin and Shoumik by [Pranto](https://prantosmss.github.io/).
