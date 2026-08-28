@@ -77,7 +77,7 @@ const FOLDERS = [
 
   // ── WEDDING ───────────────────────────────────────────────────────────────
   {
-    id:       "1-ML4PDxsMAJiNkDMRfkbcM041Xk9CZDy",
+    id:       "1eX-XRCIph0JxunH5fZwilWv525GoZyUZ",
     category: "wedding",
     type:     "photo",
     skip:     false,
@@ -89,7 +89,7 @@ const FOLDERS = [
     skip:     true,
   },
   {
-    id:       "1Oj-6KRfyeT54IphIhYhahZuiUDOc6JoC",
+    id:       "1vEFSMB2hCNdLQkFJQvIBAcJWH54Tymnz",
     category: "wedding",
     type:     "photo",
     cover:    true,
@@ -107,7 +107,7 @@ const FOLDERS = [
     id:       "1vhQsTFlDSfmczOveN9Hfp2Yaea2LQ6kj",
     category: "reception",
     type:     "video",
-    skip:     false,
+    skip:     true,
   },
   {
     id:       "1DK2YFdnOvD31mhi1ufBumwZuppcIv7nV",
