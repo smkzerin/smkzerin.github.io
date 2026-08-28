@@ -75,10 +75,11 @@
     const HOLOD_IMAGE_ID = '1g_iY5j0f5Su6B3kNsj2PhMhY3W4iIOFA';
     const WEDDING_IMAGE_ID = '1QwdnReom-lm4-t4ctYUuFazIGkC76Dp9';
     const RECEPTION_IMAGE_ID = '1bV8QXcYMFOZm_ygqtTiGdpBm39xQIJIX';
-    const driveBase = 'https://drive.google.com/uc?export=view&id=';
-    document.getElementById('img-holud').src     = driveBase + HOLOD_IMAGE_ID;
-    document.getElementById('img-wedding').src   = driveBase + WEDDING_IMAGE_ID;
-    document.getElementById('img-reception').src = driveBase + RECEPTION_IMAGE_ID;
+    const driveBase1 = 'https://drive.google.com/thumbnail?id=';
+    const driveBase2 = '&sz=w1000';
+    document.getElementById('img-holud').src     = driveBase1 + HOLOD_IMAGE_ID + driveBase2;
+    document.getElementById('img-wedding').src   = driveBase1 + WEDDING_IMAGE_ID + driveBase2;
+    document.getElementById('img-reception').src = driveBase1 + RECEPTION_IMAGE_ID + driveBase2;
   </script>
 
 </main>
