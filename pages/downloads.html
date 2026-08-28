@@ -45,22 +45,41 @@
 
   <!-- Whole-folder shortcuts -->
   <section class="grid sm:grid-cols-3 gap-4 mb-12">
-    <a href="https://drive.google.com/drive/folders/1v3f_cnle9k_e11oc4_UsKWAmSXLzIEC2?usp=drive_link" target="_blank" rel="noopener noreferrer" class="block rounded-xl border p-5" style="border-color:rgba(43,38,32,0.15)">
-      <p class="text-xs tracking-[0.2em] uppercase mb-1" style="color:var(--marigold-deep)">Holud night</p>
-      <p class="font-display text-xl">Open full folder in Drive</p>
-      <p class="text-xs mt-1" style="color:rgba(43,38,32,0.55)">All photos and raw video</p>
+    <a href="https://drive.google.com/drive/folders/1v3f_cnle9k_e11oc4_UsKWAmSXLzIEC2?usp=drive_link" target="_blank" rel="noopener noreferrer" class="block rounded-xl border overflow-hidden" style="border-color:rgba(43,38,32,0.15)">
+      <img id="img-holud" alt="Holud night preview" class="w-full object-cover rounded-t-xl" style="aspect-ratio:3/2">
+      <div class="p-5">
+        <p class="text-xs tracking-[0.2em] uppercase mb-1" style="color:var(--marigold-deep)">Holud</p>
+        <p class="font-display text-xl">Open full folder in Drive</p>
+        <p class="text-xs mt-1" style="color:rgba(43,38,32,0.55)">All raw photos</p>
+      </div>
     </a>
-    <a href="https://drive.google.com/drive/folders/1TtPUA7hYG4h33lAvpEvBS0J3bORUj18M?usp=drive_link" target="_blank" rel="noopener noreferrer" class="block rounded-xl border p-5" style="border-color:rgba(43,38,32,0.15)">
-      <p class="text-xs tracking-[0.2em] uppercase mb-1" style="color:var(--maroon)">Wedding night</p>
-      <p class="font-display text-xl">Open full folder in Drive</p>
-      <p class="text-xs mt-1" style="color:rgba(43,38,32,0.55)">All photos and raw video</p>
+    <a href="https://drive.google.com/drive/folders/1TtPUA7hYG4h33lAvpEvBS0J3bORUj18M?usp=drive_link" target="_blank" rel="noopener noreferrer" class="block rounded-xl border overflow-hidden" style="border-color:rgba(43,38,32,0.15)">
+      <img id="img-wedding" alt="Wedding night preview" class="w-full object-cover rounded-t-xl" style="aspect-ratio:3/2">
+      <div class="p-5">
+        <p class="text-xs tracking-[0.2em] uppercase mb-1" style="color:var(--maroon)">Wedding</p>
+        <p class="font-display text-xl">Open full folder in Drive</p>
+        <p class="text-xs mt-1" style="color:rgba(43,38,32,0.55)">All raw photos</p>
+      </div>
     </a>
-    <a href="https://drive.google.com/drive/folders/1rvJY-wPF3k6lYGyvei_vRsHkiSzohW7m?usp=drive_link" target="_blank" rel="noopener noreferrer" class="block rounded-xl border p-5" style="border-color:rgba(43,38,32,0.15)">
-      <p class="text-xs tracking-[0.2em] uppercase mb-1" style="color:var(--green)">Reception</p>
-      <p class="font-display text-xl">Open full folder in Drive</p>
-      <p class="text-xs mt-1" style="color:rgba(43,38,32,0.55)">All photos and raw video</p>
+    <a href="https://drive.google.com/drive/folders/1rvJY-wPF3k6lYGyvei_vRsHkiSzohW7m?usp=drive_link" target="_blank" rel="noopener noreferrer" class="block rounded-xl border overflow-hidden" style="border-color:rgba(43,38,32,0.15)">
+      <img id="img-reception" alt="Reception preview" class="w-full object-cover rounded-t-xl" style="aspect-ratio:3/2">
+      <div class="p-5">
+        <p class="text-xs tracking-[0.2em] uppercase mb-1" style="color:var(--green)">Reception</p>
+        <p class="font-display text-xl">Open full folder in Drive</p>
+        <p class="text-xs mt-1" style="color:rgba(43,38,32,0.55)">All raw photos</p>
+      </div>
     </a>
   </section>
+
+  <script>
+    const HOLOD_IMAGE_ID = '1g_iY5j0f5Su6B3kNsj2PhMhY3W4iIOFA';
+    const WEDDING_IMAGE_ID = '1QwdnReom-lm4-t4ctYUuFazIGkC76Dp9';
+    const RECEPTION_IMAGE_ID = '1bV8QXcYMFOZm_ygqtTiGdpBm39xQIJIX';
+    const driveBase = 'https://drive.google.com/uc?export=view&id=';
+    document.getElementById('img-holud').src     = driveBase + HOLOD_IMAGE_ID;
+    document.getElementById('img-wedding').src   = driveBase + WEDDING_IMAGE_ID;
+    document.getElementById('img-reception').src = driveBase + RECEPTION_IMAGE_ID;
+  </script>
 
 </main>
 
