@@ -12,7 +12,7 @@
 <link rel="icon" type="image/x-icon" href="../icons/favicon.ico">
 <link rel="manifest" href="../manifest.json">
 <meta name="theme-color" content="#7A2436">
-<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
 </head>
 <body class="min-h-screen flex flex-col">
 
@@ -94,10 +94,6 @@
 
 <script>
 document.getElementById("year").textContent = new Date().getFullYear();
-
-const menuBtn = document.getElementById("menu-btn");
-const mobileNav = document.getElementById("mobile-nav");
-menuBtn.addEventListener("click", () => mobileNav.classList.toggle("hidden"));
 </script>
 <button id="pwa-install-btn" class="pwa-install-btn" aria-label="Install app">
   <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
